@@ -15,6 +15,7 @@ using Cpp2IL.Core.Extensions;
 using Il2CppInterop.Runtime.Injection;
 using HarmonyLib;
 using Il2CppSystem.Runtime.Remoting.Metadata;
+using System.Linq;
 
 
 namespace Randomizer;
@@ -24,9 +25,27 @@ public class Plugin : BasePlugin
 {
 
     List<GameObject> objects = new List<GameObject>();
+    status status;
     internal static new ManualLogSource Log;
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
+        status = Component.FindObjectOfType<status>();
+        if (status is not null) {
+            if (status.npcvd is not null ) {
+                vendordata item = status.npcvd.BillInventory[1];
+                if (item.ItemName != "Water Movement") {
+                    item.ItemName = "Water Movement";
+                    item.ItemNumber = 20;
+                    item.ReqWorldState = 0;
+                    item.Cost = 1;
+                    item.Stock = 1;
+                }
+                status.npcvd.BillInventory[1] = item;
+            }
+        }
+        
+
+
         GameObject versionnumber = GameObject.Find("Camera Holder");
         if (versionnumber != null) {
             Transform child = versionnumber.transform.Find("VersionNumber");
@@ -79,6 +98,7 @@ public class Plugin : BasePlugin
         {
             Log.LogError($"[Randomizer] Harmony - FAILEd to Apply Patch's: {e}");
         }
+
     }
  
     

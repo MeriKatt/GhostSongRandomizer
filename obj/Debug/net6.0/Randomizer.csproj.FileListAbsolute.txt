@@ -87,3 +87,4 @@ D:\SteamLibrary\steamapps\common\GhostSong\BepInEx\plugins\Randomizer\obj\Debug\
 D:\SteamLibrary\steamapps\common\GhostSong\BepInEx\plugins\Randomizer\obj\Debug\net6.0\Randomizer.pdb
 D:\SteamLibrary\steamapps\common\GhostSong\BepInEx\plugins\Randomizer\obj\Debug\net6.0\ref\Randomizer.dll
 D:\SteamLibrary\steamapps\common\GhostSong\BepInEx\plugins\Randomizer\bin\Debug\net6.0\UnityEngine.dll
+D:\SteamLibrary\steamapps\common\GhostSong\BepInEx\plugins\Randomizer\obj\Debug\net6.0\Randomizer.sourcelink.json

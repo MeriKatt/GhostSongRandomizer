@@ -19,22 +19,64 @@ namespace Randomizer
     public class CheckerComponent : MonoBehaviour
     {
 
+        public static void spawnloot(GameObject inst, bool Module, bool Item, int arrayNumber, int itemNumber, int moduleNumber, SparklyItem.modtype moduleType)
+        {
+            Vector2 v2 = new Vector2(inst.transform.position.x, inst.transform.position.y + 3f);
+            SparklyItem sparklyItem2 = UnityEngine.Object.Instantiate<SparklyItem>(global.afx.itemdrop, v2, Quaternion.identity);
+            sparklyItem2.wasdropped = true;
+            sparklyItem2.Item = Item;
+            sparklyItem2.Module = Module;
+            sparklyItem2.arrayNumber = arrayNumber;
+            sparklyItem2.moduleNumber = moduleNumber;
+            sparklyItem2.moduleType = moduleType;
+            sparklyItem2.itemNumber = itemNumber;
+        }
+
+
+        [HarmonyPatch(typeof(devilwink), nameof(devilwink.die))]
+        [HarmonyPrefix]
+        public static bool die(devilwink __instance)
+        {
+            __instance.dc.SpawnBots(UnityEngine.Random.Range(26, 26), "medium", new Vector2(__instance.transform.position.x, __instance.transform.position.y + 4f), 2f, 1f);
+            __instance.dc.SpawnBots(UnityEngine.Random.Range(9, 9), "small", new Vector2(__instance.transform.position.x, __instance.transform.position.y + 4f), 2f, 1f);
+            __instance.burnloop.Stop();
+            CheckerComponent.spawnloot(__instance.gameObject, true, false, 94, 0, 12, SparklyItem.modtype.Modifier);
+            __instance.dc.EnemySpecialDeath(true);
+            if (__instance.dc.facingright)
+            {
+                global.statstat.thedata.OtherData[108] = 1;
+            }
+            else
+            {
+                global.statstat.thedata.OtherData[108] = 0;
+            }
+            __instance.rb.velocity = new Vector2(0f, 0f);
+            global.statstat.devilwinkcorpsepos = new Vector2(__instance.transform.position.x, __instance.transform.position.y);
+            global.statstat.thedata.OtherData[107] = 1;
+            Collider2D[] array = __instance.thecols;
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i].enabled = false;
+            }
+            __instance.fade = 1f;
+            __instance.fadetarg = 1f;
+            __instance.stealthed = false;
+            __instance.StartCoroutine(__instance.diesounds());
+            __instance.anim.Play("die", 0, 0f);
+            __instance.StartCoroutine(__instance.dieanim());
+            global.statstat.gsfx.PlayAnySound(__instance.dievoc, __instance.transform.position, 1f, 1f, 0f, 0.5f);
+            return false;
+        }
+
+
+
         [HarmonyPatch(typeof(surfacehuntergirl), nameof(surfacehuntergirl.Die))]
         [HarmonyPrefix]
         public static bool Die(surfacehuntergirl __instance)
         {
             global.statstat.gsfx.PlayBossDeathChime(__instance.transform.position, 0f);
             __instance.dead = true;
-
-            Vector2 v = new Vector2(__instance.transform.position.x, __instance.transform.position.y + 3f);
-            SparklyItem sparklyItem = UnityEngine.Object.Instantiate<SparklyItem>(global.afx.itemdrop, v, Quaternion.identity);
-            sparklyItem.Item = false;
-            sparklyItem.Module = true;
-            sparklyItem.moduleNumber = 12;
-            sparklyItem.arrayNumber = 0;
-            sparklyItem.moduleType = SparklyItem.modtype.Weapons;
-
-
+            CheckerComponent.spawnloot(__instance.gameObject, true, false, 0, 0, 12, SparklyItem.modtype.Modifier);
             __instance.gibHolder.Go(__instance.dc.DeathForce);
             float num = 0.2f;
             if (__instance.transform.localScale.x < 0f)
