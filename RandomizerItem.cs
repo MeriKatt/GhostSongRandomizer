@@ -29,10 +29,10 @@ namespace Randomizer
         public string Name;
 
         public static void saveToFile(bool wasCollected, string Name) {
-            SaveDataManager.Set<bool>(Name + "_wasCollected", wasCollected);
+            SaveDataManager.Set<bool>(Name + "_wasCollected_"+global.statstat.SaveSlot, wasCollected);
         }
         public static bool loadFromFile(string Name) {
-            return SaveDataManager.Get<bool>(Name + "_wasCollected", false);
+            return SaveDataManager.Get<bool>(Name + "_wasCollected_"+global.statstat.SaveSlot, false);
         }
 
         
