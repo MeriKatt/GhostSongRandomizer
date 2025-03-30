@@ -73,8 +73,48 @@ namespace Randomizer
             new RandomizerLocation().setName("devilwink").setItem(false).setItemNum(0).setArray(94)
             .setModule(true).setModuleNum(12).setModType(SparklyItem.modtype.Modifier),
             new RandomizerLocation().setName("brad").setItem(false).setItemNum(0).setArray(88).setModule(true)
-            .setModType(SparklyItem.modtype.Weapons).setModuleNum(3)
+            .setModType(SparklyItem.modtype.Weapons).setModuleNum(3),
+            new RandomizerLocation().setName("alienblob").setItem(false).setItemNum(0).setArray(92).setModule(true)
+            .setModType(SparklyItem.modtype.Weapons).setModuleNum(14),
+            new RandomizerLocation().setName("bigheadboss").setItem(false).setItemNum(0).setArray(84).setModule(true)
+            .setModType(SparklyItem.modtype.Modifier).setModuleNum(6),
+            new RandomizerLocation().setName("fistomini").setItem(false).setItemNum(0).setArray(84).setModule(true)
+            .setModType(SparklyItem.modtype.Modifier).setModuleNum(4),
+            new RandomizerLocation().setName("fistorandom1").setItem(false).setItemNum(0).setArray(84).setModule(true)
+            .setModType(SparklyItem.modtype.Modifier).setModuleNum(15),
+            new RandomizerLocation().setName("fistorandom2").setItem(false).setItemNum(0).setArray(84).setModule(true)
+            .setModType(SparklyItem.modtype.Special).setModuleNum(1),
+            new RandomizerLocation().setName("flailboss").setItem(false).setItemNum(0).setArray(15).setModule(true)
+            .setModType(SparklyItem.modtype.Modifier).setModuleNum(11),
+            new RandomizerLocation().setName("henriettmutated").setItem(false).setItemNum(0).setArray(90).setModule(true)
+            .setModType(SparklyItem.modtype.Special).setModuleNum(4),
+            new RandomizerLocation().setName("newmama").setItem(false).setItemNum(0).setArray(34).setModule(true)
+            .setModType(SparklyItem.modtype.Special).setModuleNum(2),
+            new RandomizerLocation().setName("newspikemouth1").setItem(false).setItemNum(0).setArray(34).setModule(true)
+            .setModType(SparklyItem.modtype.Modifier).setModuleNum(15),
+            new RandomizerLocation().setName("newspikemouth2").setItem(false).setItemNum(0).setArray(34).setModule(true)
+            .setModType(SparklyItem.modtype.Special).setModuleNum(1),
+            new RandomizerLocation().setName("phz").setItem(false).setItemNum(0).setArray(93).setModule(true)
+            .setModType(SparklyItem.modtype.Weapons).setModuleNum(11),
+            new RandomizerLocation().setName("warrior1").setItem(false).setItemNum(0).setArray(93).setModule(true)
+            .setModType(SparklyItem.modtype.Special).setModuleNum(7),
+            new RandomizerLocation().setName("warrior2").setItem(false).setItemNum(0).setArray(93).setModule(true)
+            .setModType(SparklyItem.modtype.Special).setModuleNum(8),
+            new RandomizerLocation().setName("worker").setItem(false).setItemNum(0).setArray(93).setModule(true)
+            .setModType(SparklyItem.modtype.Special).setModuleNum(6),
+            new RandomizerLocation().setName("slimedude").setItem(false).setItemNum(0).setArray(91).setModule(true)
+            .setModType(SparklyItem.modtype.Weapons).setModuleNum(13),
+            new RandomizerLocation().setName("spikerunner").setItem(false).setItemNum(0).setArray(22).setModule(true)
+            .setModType(SparklyItem.modtype.Weapons).setModuleNum(12),
         };
+
+        public static void newSpawnLoot(string name, GameObject instance) {
+            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
+                return _loc.name == name;
+            });
+            CheckerComponent.spawnloot(instance, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
+
+        }
 
         public static void spawnloot(GameObject inst, bool Module, bool Item, int arrayNumber, int itemNumber, int moduleNumber, SparklyItem.modtype moduleType)
         {

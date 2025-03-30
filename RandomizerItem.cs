@@ -17,15 +17,15 @@ using System.Net;
 
 namespace Randomizer
 {
-    public class BaseEnemyPatch : MonoBehaviour
+    public class RandomizerItem : MonoBehaviour
     {
+        bool wasCollected;
+        SparklyItem item;
 
-        [HarmonyPatch(typeof(devilwink), nameof(devilwink.die))]
-        [HarmonyPrefix]
-        public static bool die(devilwink __instance)
-        {
+        Scene scene;
+
+        Vector2 pos;
+
         
-            return false;
-        }
     }
 }
