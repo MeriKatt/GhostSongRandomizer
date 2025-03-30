@@ -28,6 +28,36 @@ public class Plugin : BasePlugin
     status status;
     internal static new ManualLogSource Log;
 
+
+    private void spawnRandomizerItem(string Name, Scene scene, Vector3 pos) {
+        if (RandomizerItem.loadFromFile(Name) == false)
+        {
+            var loc = CheckerComponent.locations.Find((RandomizerLocation loc) => {
+                return loc.name == Name;
+            });
+            var go = new GameObject("RandomizerItem");
+            go.AddComponent<RandomizerItem>();
+            RandomizerItem item = go.GetComponent<RandomizerItem>();
+                    //new Vector3(106.8151f, 10.6966f, 0);
+            item.Name = Name;
+            item.item = UnityEngine.Object.Instantiate<SparklyItem>(global.afx.itemdrop);
+            item.item.transform.parent = go.transform;
+            item.item.itemNumber = loc.itemNumber;
+            item.item.Item = loc.Item;
+            item.item.Module = loc.Module;
+            item.item.moduleNumber = loc.moduleNumber;
+            item.item.arrayNumber = loc.arrayNumber;
+            item.item.moduleType = loc.modType;
+            item.pos = pos;
+            item.pos.y += 3f;
+            item.scene = scene.name;
+            item.wasCollected = RandomizerItem.loadFromFile(item.Name);
+            item.item.dead = item.wasCollected;
+            go.transform.position = pos;
+            item.item.transform.position = pos;
+        }
+    }
+
     private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
         status = Component.FindObjectOfType<status>();
         if (status is not null) {
@@ -42,10 +72,10 @@ public class Plugin : BasePlugin
                 }
                 status.npcvd.BillInventory[1] = item;
             }
+        }        
+        if (scene.name == "doopy3") {
+            spawnRandomizerItem("NewTestItem", scene, new Vector3(106.8151f, 8.6966f, 0));
         }
-        
-
-
         GameObject versionnumber = GameObject.Find("Camera Holder");
         if (versionnumber != null) {
             Transform child = versionnumber.transform.Find("VersionNumber");
@@ -56,9 +86,7 @@ public class Plugin : BasePlugin
                     obj.GetComponent<TextMesh>().text = scene.name;
                 }
             }
-        }
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy")) {
-            objects.Add(obj);
+            
         }
     }
     public override void Load()
@@ -72,6 +100,7 @@ public class Plugin : BasePlugin
         try
         {
             ClassInjector.RegisterTypeInIl2Cpp<CheckerComponent>();
+            ClassInjector.RegisterTypeInIl2Cpp<RandomizerItem>();
             var go = new GameObject("CheckerObject");
             go.AddComponent<CheckerComponent>();
             UnityEngine.Object.DontDestroyOnLoad(go);
@@ -85,7 +114,24 @@ public class Plugin : BasePlugin
             var harmony = new Harmony(Randomizer.MyPluginInfo.PLUGIN_GUID);
             try
             {
+                harmony.PatchAll(typeof(Randomizer.AlienBlobPath));
+                //harmony.PatchAll(typeof(Randomizer.BigHeadBossPatch));
+                harmony.PatchAll(typeof(Randomizer.BradPatch));
                 harmony.PatchAll(typeof(Randomizer.CheckerComponent));
+                harmony.PatchAll(typeof(Randomizer.DevilWinkPatch));
+                harmony.PatchAll(typeof(Randomizer.FistoPatch));
+                harmony.PatchAll(typeof(Randomizer.FlailBossPatch));
+                harmony.PatchAll(typeof(Randomizer.HenriettMutatedPatch));
+                harmony.PatchAll(typeof(Randomizer.NewMamaPatch));
+                harmony.PatchAll(typeof(Randomizer.NewSpikeMouthPatch));
+                harmony.PatchAll(typeof(Randomizer.PhzPatch));
+                harmony.PatchAll(typeof(Randomizer.Plugin));
+                harmony.PatchAll(typeof(Randomizer.SlimeDudePatch));
+                harmony.PatchAll(typeof(Randomizer.SpikeRunnerPatch));
+                harmony.PatchAll(typeof(Randomizer.SurfaceHunterPatch));
+                harmony.PatchAll(typeof(Randomizer.WarriorPatch));
+                harmony.PatchAll(typeof(Randomizer.WorkerPatch));
+                harmony.PatchAll(typeof(Randomizer.SparklyItemPatch));
             }
             catch (System.Exception e)
             {

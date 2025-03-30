@@ -106,6 +106,8 @@ namespace Randomizer
             .setModType(SparklyItem.modtype.Weapons).setModuleNum(13),
             new RandomizerLocation().setName("spikerunner").setItem(false).setItemNum(0).setArray(22).setModule(true)
             .setModType(SparklyItem.modtype.Weapons).setModuleNum(12),
+            new RandomizerLocation().setName("NewTestItem").setItem(true).setItemNum(43).setArray(22).setModule(false)
+            .setModType(SparklyItem.modtype.Weapons).setModuleNum(12),
         };
 
         public static void newSpawnLoot(string name, GameObject instance) {

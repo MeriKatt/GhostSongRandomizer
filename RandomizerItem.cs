@@ -19,12 +19,21 @@ namespace Randomizer
 {
     public class RandomizerItem : MonoBehaviour
     {
-        bool wasCollected;
-        SparklyItem item;
+        public bool wasCollected;
+        public SparklyItem item;
 
-        Scene scene;
+        public string scene;
 
-        Vector2 pos;
+        public Vector2 pos;
+
+        public string Name;
+
+        public static void saveToFile(bool wasCollected, string Name) {
+            SaveDataManager.Set<bool>(Name + "_wasCollected", wasCollected);
+        }
+        public static bool loadFromFile(string Name) {
+            return SaveDataManager.Get<bool>(Name + "_wasCollected", false);
+        }
 
         
     }

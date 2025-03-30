@@ -11,7 +11,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
-using System.Collections.Generic;
 using System.Threading;
 using System.Net.NetworkInformation;
 using Cpp2IL.Core.Extensions;
