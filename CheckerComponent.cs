@@ -13,11 +13,68 @@ using System.Threading;
 using System.Net.NetworkInformation;
 using Cpp2IL.Core.Extensions;
 using HarmonyLib;
+using System.Net;
 
 namespace Randomizer
 {
+
+    public class RandomizerLocation: MonoBehaviour
+    {
+        public new string name;
+        public bool Module;
+        public bool Item;
+        public int arrayNumber;
+        public int itemNumber;
+        public int moduleNumber;
+        public SparklyItem.modtype modType;
+
+        public RandomizerLocation setName(string name){
+            this.name = name;
+            return this;
+        }
+        public RandomizerLocation setModule(bool mod) {
+            this.Module = mod;
+            return this;
+        }
+
+        public RandomizerLocation setItem(bool item) {
+            this.Item = item;
+            return this;
+        }
+
+        public RandomizerLocation setArray(int arry) {
+            this.arrayNumber = arry;
+            return this;
+        }
+
+        public RandomizerLocation setItemNum(int num) {
+            this.itemNumber = num;
+            return this;
+        }
+
+        public RandomizerLocation setModuleNum(int num) {
+            this.moduleNumber = num;
+            return this;
+        }
+
+        public RandomizerLocation setModType(SparklyItem.modtype mod) {
+            this.modType = mod;
+            return this;
+        }
+
+    }
+
     public class CheckerComponent : MonoBehaviour
     {
+
+        public static List<RandomizerLocation> locations = new List<RandomizerLocation>() {
+            new RandomizerLocation().setName("surfacehuntergirl").setItem(true).setItemNum(0).setArray(0)
+            .setModule(false).setModuleNum(0).setModType(SparklyItem.modtype.Special),
+            new RandomizerLocation().setName("devilwink").setItem(false).setItemNum(0).setArray(94)
+            .setModule(true).setModuleNum(12).setModType(SparklyItem.modtype.Modifier),
+            new RandomizerLocation().setName("brad").setItem(false).setItemNum(0).setArray(88).setModule(true)
+            .setModType(SparklyItem.modtype.Weapons).setModuleNum(3)
+        };
 
         public static void spawnloot(GameObject inst, bool Module, bool Item, int arrayNumber, int itemNumber, int moduleNumber, SparklyItem.modtype moduleType)
         {
@@ -31,81 +88,6 @@ namespace Randomizer
             sparklyItem2.moduleType = moduleType;
             sparklyItem2.itemNumber = itemNumber;
         }
-
-
-        [HarmonyPatch(typeof(devilwink), nameof(devilwink.die))]
-        [HarmonyPrefix]
-        public static bool die(devilwink __instance)
-        {
-            __instance.dc.SpawnBots(UnityEngine.Random.Range(26, 26), "medium", new Vector2(__instance.transform.position.x, __instance.transform.position.y + 4f), 2f, 1f);
-            __instance.dc.SpawnBots(UnityEngine.Random.Range(9, 9), "small", new Vector2(__instance.transform.position.x, __instance.transform.position.y + 4f), 2f, 1f);
-            __instance.burnloop.Stop();
-            CheckerComponent.spawnloot(__instance.gameObject, true, false, 94, 0, 12, SparklyItem.modtype.Modifier);
-            __instance.dc.EnemySpecialDeath(true);
-            if (__instance.dc.facingright)
-            {
-                global.statstat.thedata.OtherData[108] = 1;
-            }
-            else
-            {
-                global.statstat.thedata.OtherData[108] = 0;
-            }
-            __instance.rb.velocity = new Vector2(0f, 0f);
-            global.statstat.devilwinkcorpsepos = new Vector2(__instance.transform.position.x, __instance.transform.position.y);
-            global.statstat.thedata.OtherData[107] = 1;
-            Collider2D[] array = __instance.thecols;
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i].enabled = false;
-            }
-            __instance.fade = 1f;
-            __instance.fadetarg = 1f;
-            __instance.stealthed = false;
-            __instance.StartCoroutine(__instance.diesounds());
-            __instance.anim.Play("die", 0, 0f);
-            __instance.StartCoroutine(__instance.dieanim());
-            global.statstat.gsfx.PlayAnySound(__instance.dievoc, __instance.transform.position, 1f, 1f, 0f, 0.5f);
-            return false;
-        }
-
-
-
-        [HarmonyPatch(typeof(surfacehuntergirl), nameof(surfacehuntergirl.Die))]
-        [HarmonyPrefix]
-        public static bool Die(surfacehuntergirl __instance)
-        {
-            global.statstat.gsfx.PlayBossDeathChime(__instance.transform.position, 0f);
-            __instance.dead = true;
-            CheckerComponent.spawnloot(__instance.gameObject, true, false, 0, 0, 12, SparklyItem.modtype.Modifier);
-            __instance.gibHolder.Go(__instance.dc.DeathForce);
-            float num = 0.2f;
-            if (__instance.transform.localScale.x < 0f)
-            {
-                num *= -1f;
-            }
-            UnityEngine.Object.Instantiate<GameObject>(__instance.fx.newsplosion, new Vector2(__instance.dc.bulletpos.x + -num, __instance.dc.bulletpos.y), Quaternion.identity);
-            global.statstat.bulletPools.SparkBurstAt(new Vector2(__instance.dc.bulletpos.x, __instance.dc.bulletpos.y), 0.1f, 0.7f, 4f, 30f, 35f, 0f);
-            if (__instance.dc.elbydistance.y < 5f && __instance.dc.elbydistance.x < 5f)
-            {
-                global.elby.GetComponent<playermovement>().Blooded(0.9f, __instance.dc.bloodColor2);
-                global.elby.GetComponent<lbflash>().RollFlash(__instance.dc.bloodColor2, 0.5f, 0.05f);
-            }
-            UnityEngine.Object.Instantiate<GameObject>(__instance.deathglow, new Vector2(__instance.transform.position.x + 0.2f, __instance.transform.position.y + 0.14f), Quaternion.identity).GetComponent<deathglow>().LetsGo(new Color(0.7f, 0.04f, 0.04f, 1f));
-            global.statstat.gsfx.PlaySplat(__instance.transform.position, 0.6f, 0.95f, 0.1f, 1f);
-            global.statstat.gsfx.PlayAnySoundDelayed(__instance.mutationsounds[0], __instance.transform.position, 0.4f, 1f, 0f, 1f, 0.1f);
-            __instance.dc.EnemyDeath();
-            __instance.SpawnDoll();
-            __instance.SpawnHeadDoll();
-            __instance.SpawnArmDoll();
-            __instance.SpawnSpineDoll();
-            for (int i = 12; i > 0; i--)
-            {
-                __instance.spawnblood();
-            }
-            UnityEngine.Object.Destroy(__instance.gameObject, 0f);
-            return false;
-        }
-    
     }
 
 }
