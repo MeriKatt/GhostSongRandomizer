@@ -55,6 +55,7 @@ public class Plugin : BasePlugin
             item.item.dead = item.wasCollected;
             go.transform.position = pos;
             item.item.transform.position = pos;
+            SceneManager.MoveGameObjectToScene(go, scene);
         }
     }
 
