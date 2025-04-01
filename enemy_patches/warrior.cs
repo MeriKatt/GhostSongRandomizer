@@ -20,28 +20,6 @@ namespace Randomizer
 {
     public class WarriorPatch : MonoBehaviour
     {
-        public static void newLoot(RoslockWarrior inst) {
-            int num = UnityEngine.Random.Range(1, 3);
-            if (num == 1)
-            {
-                float value = UnityEngine.Random.value;
-                if (!global.statstat.specialmodules[7].Acquired && value > 0.93f)
-                {
-                    global.statstat.gsfx.PlayBossDeathChime(inst.transform.position, 0f);
-                    CheckerComponent.newSpawnLoot("warrior1", inst.gameObject);
-                    return;
-                }
-            }
-            else if (num == 2)
-            {
-                float value2 = UnityEngine.Random.value;
-                if (!global.statstat.specialmodules[8].Acquired && value2 > 0.93f)
-                {
-                    global.statstat.gsfx.PlayBossDeathChime(inst.transform.position, 0f);
-                    CheckerComponent.newSpawnLoot("warrior2", inst.gameObject);
-                }
-            }
-        }
 
         [HarmonyPatch(typeof(RoslockWarrior), nameof(RoslockWarrior.Die))]
         [HarmonyPrefix]
@@ -49,7 +27,6 @@ namespace Randomizer
         {
             
             __instance.dc.EnemyDeath();
-            WarriorPatch.newLoot(__instance);
             if (__instance.dc.elbydistance.y < 5f && __instance.dc.elbydistance.x < 5f)
             {
                 float num = 0.5f - __instance.dc.elbydistance.x / 10f;

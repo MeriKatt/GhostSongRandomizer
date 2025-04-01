@@ -36,15 +36,18 @@ namespace Randomizer;
 [DataContract]
 public class RandomizerLocations {
     [DataMember(IsRequired = true)]
-    public List<RandomizerLocationInfo> locations { get; set; }
+    public List<BRandomizerLocationInfo> locations { get; set; }
     public RandomizerLocations() {
-        this.locations = new List<RandomizerLocationInfo>();
+        this.locations = new List<BRandomizerLocationInfo>();
     }
 }
 
+
 [DataContract]
-public class RandomizerLocationInfo
+public class BRandomizerLocationInfo
 {
+    [DataMember]
+    public string Name { get; set; }
     [DataMember]
     public string scene_name { get; set; }
     [DataMember]
@@ -61,58 +64,10 @@ public class RandomizerLocationInfo
     public string array_number { get; set; }
     [DataMember]
     public string item_position { get; set; }
-
-
-    public static string toJson(RandomizerLocationInfo info) {
-
-        return $$"""
-            {
-                "scene_name": "{{info.scene_name}}",
-                "item_number": "{{info.item_number}}",
-                "is_item": "{{info.is_item}}",
-                "is_module": "{{info.is_module}}",
-                "module_number": "{{info.module_number}}",
-                "module_type": "{{info.module_type}}",
-                "array_number": "{{info.array_number}}",
-                "item_position": "{{info.item_position}}"
-            
-            }
-        
-        """;
-    }
-
-    /*public static void updateItemNum(string ObjName, string scene_name,
-    int itemNumber,
-    bool Item,
-    bool Module,
-    int moduleNumber,
-    string moduleType,
-    int arrayNumber,
-    Vector2 position)
-    {
-        Plugin.location_number += 1;
-        SaveDataManager.Set<int>(Plugin.nameOfVariable, Plugin.location_number );
-        System.Console.WriteLine(Plugin.location_number);
-        RandomizerLocationInfo info = new RandomizerLocationInfo();
-        info.scene_name = scene_name;
-        info.item_number = itemNumber;
-        info.is_item = Item;
-        info.is_module = Module;
-        info.module_number = moduleNumber;
-        info.module_type = moduleType;
-        info.array_number = arrayNumber;
-        info.item_position = position.ToString();
-        System.Console.WriteLine(info.scene_name);
-        string directory = "./locations/" + Plugin.location_number + "/";
-        string fileName = directory + ObjName+".json";
-        System.Console.WriteLine(fileName);
-        Directory.CreateDirectory(directory);
-        string json = RandomizerLocationInfo.toJson(info);
-        System.Console.WriteLine(json);
-        File.WriteAllText(@""+fileName, json);
-        System.Console.WriteLine(File.ReadAllText(fileName));
-    }*/
 }
+
+
+
 
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
@@ -156,6 +111,17 @@ public class Plugin : BasePlugin
     public static bool isItemCloseEnough(Vector2 v1, Vector2 v2){
             return v1.x - v2.x < 1 && v1.x - v2.x > -1 && v1.y - v2.y < 1 && v1.y - v2.y > -1;
     }
+    public static bool isItemInCurScene(string sceneName, RandomizerLocation loc) 
+    {
+        string[] words = loc.name.Split("/");
+        foreach(string word in words) {
+            if (word == sceneName) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
         status = Component.FindObjectOfType<status>();
@@ -174,17 +140,14 @@ public class Plugin : BasePlugin
         }
         SparklyItem[] items = GameObject.FindObjectsOfType<SparklyItem>();
         foreach (SparklyItem item in items) {
-            if (item.isActiveAndEnabled) {
-                foreach( RandomizerLocation loc in CheckerComponent.locations) {
-                    if (isItemCloseEnough(loc.position, (Vector2)item.transform.position)){
-                        spawnRandomizerItem(loc.name, scene, new Vector3(loc.position.x, loc.position.y, 0));
-                        System.Console.WriteLine("Location found, spawning it");
-                        UnityEngine.Object.Destroy(item.gameObject);
-                        break;
-                    }
-                }
-            }
-
+            UnityEngine.Object.Destroy(item.gameObject);
+        }
+        foreach( RandomizerLocation loc in CheckerComponent.locations) 
+        {
+            if (isItemInCurScene(scene.name, loc)) {
+                spawnRandomizerItem(loc.name, scene, new Vector3(loc.position.x, loc.position.y, 0));
+                System.Console.WriteLine("Location found, spawning it");
+            }  
         }
 
         /*if (scene.name == "doopy3") {
@@ -215,20 +178,36 @@ public class Plugin : BasePlugin
     }
     public override void Load()
     {
+
         Plugin.AllLocations = new RandomizerLocations();
         string input = File.ReadAllText("./locations/AllLocations.json");
         using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
         {
             Plugin.AllLocations = (RandomizerLocations)ser.ReadObject(ms);
         }
-        foreach(RandomizerLocationInfo info in Plugin.AllLocations.locations) {
-            CheckerComponent.locations.Add(new RandomizerLocation().setName(Plugin.AllLocations.locations.IndexOf(info).ToString() + "/"+info.scene_name)
+        List<BRandomizerLocationInfo> info_list = new List<BRandomizerLocationInfo>();
+        foreach(BRandomizerLocationInfo info in Plugin.AllLocations.locations) {
+            CheckerComponent.locations.Add(new RandomizerLocation().setName(info.Name)
             .setItem(info.is_item == "True")
             .setItemNum(int.Parse(info.item_number)).setArray(int.Parse(info.array_number)).setModule(info.is_module == "True")
             .setModType(int.Parse(info.module_type)).setModuleNum(int.Parse(info.module_number)).setPosition(strToVec2(info.item_position)));
             System.Console.WriteLine("Name of added:  " +CheckerComponent.locations.ElementAt(CheckerComponent.locations.Count - 1).name);
         }
         
+        
+        var ser_ = new DataContractJsonSerializer(typeof(List<BRandomizerLocationInfo>));
+            var output = string.Empty;
+ 
+            using (var ms = new MemoryStream())
+            {
+                ser_.WriteObject(ms, info_list);
+                output = Encoding.UTF8.GetString(ms.ToArray());
+ 
+                // {"BirthDate":"\/Date(1468591293120+0300)\/","Name":"Fluffy","Tags":["black tail","green eyes"]}
+            }
+            File.WriteAllText("./locations/BetterLooseLocations.json", output);
+
+
         // Plugin startup logic
         Log = base.Log;
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
@@ -270,6 +249,11 @@ public class Plugin : BasePlugin
                 harmony.PatchAll(typeof(Randomizer.WarriorPatch));
                 harmony.PatchAll(typeof(Randomizer.WorkerPatch));
                 harmony.PatchAll(typeof(Randomizer.SparklyItemPatch));
+                harmony.PatchAll(typeof(Randomizer.CoreBotPatch));
+                harmony.PatchAll(typeof(Randomizer.SpikeScreamerPatch));
+                harmony.PatchAll(typeof(Randomizer.SprouterPatch));
+                harmony.PatchAll(typeof(Randomizer.Walker5Patch));
+                harmony.PatchAll(typeof(Randomizer.LeafPatch));
             }
             catch (System.Exception e)
             {

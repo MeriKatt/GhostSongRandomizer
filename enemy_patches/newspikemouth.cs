@@ -21,24 +21,6 @@ namespace Randomizer
     public class NewSpikeMouthPatch : MonoBehaviour
     {
 
-        public static void newRandomLoot(NewSpikeMouth inst) {
-            int num = UnityEngine.Random.Range(1, 3);
-            float value = UnityEngine.Random.value;
-            float num2 = 0.97f;
-            if (num == 1)
-            {
-                if (!global.statstat.modmodules[15].Acquired && value > num2)
-                {
-                    CheckerComponent.newSpawnLoot("newspikemouth1", inst.gameObject);
-                    return;
-                }
-            }
-            else if (num == 2 && !global.statstat.specialmodules[1].Acquired && value > num2)
-            {
-                CheckerComponent.newSpawnLoot("newspikemouth2", inst.gameObject);
-            }
-        }
-
 
         [HarmonyPatch(typeof(NewSpikeMouth), nameof(NewSpikeMouth.Die))]
         [HarmonyPrefix]
@@ -79,7 +61,6 @@ namespace Randomizer
                     }
                 }
             }
-            __instance.SpawnRandomLoot();
             allfx afx = global.afx;
             __instance.SpawnDoll();
             __instance.dc.EnemyDeath();

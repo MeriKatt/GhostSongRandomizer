@@ -20,32 +20,6 @@ namespace Randomizer
     public class FistoPatch : MonoBehaviour
     {
 
-        public static void NewSpawnRandomLoot(Fisto inst)
-        {
-            int num = UnityEngine.Random.Range(1, 3);
-            float value = UnityEngine.Random.value;
-            if (num == 1)
-            {
-                if (!global.statstat.modmodules[15].Acquired && value > 0.96f)
-                {
-                    RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                        return _loc.name == "fistorandom1";
-                    });
-                    CheckerComponent.spawnloot(inst.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
-        
-                    return;
-                }
-            }
-            else if (num == 2 && !global.statstat.specialmodules[1].Acquired && value > 0.96f)
-            {
-                    RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                        return _loc.name == "fistorandom2";
-                    });
-                    CheckerComponent.spawnloot(inst.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
-        
-            }
-        }
-
         [HarmonyPatch(typeof(Fisto), nameof(Fisto.Die))]
         [HarmonyPrefix]
         public static bool Die(Fisto __instance)
@@ -74,10 +48,6 @@ namespace Randomizer
                     return _loc.name == "fistomini";
                 });
                 CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType); 
-            }
-            else
-            {
-                FistoPatch.NewSpawnRandomLoot(__instance);
             }
             if (__instance.bloodcloud)
             {

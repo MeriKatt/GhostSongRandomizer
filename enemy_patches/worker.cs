@@ -21,14 +21,6 @@ namespace Randomizer
     public class WorkerPatch : MonoBehaviour
     {
 
-        public static void newLoot(RoslockWorker inst) {
-            float value = UnityEngine.Random.value;
-            if (!global.statstat.specialmodules[6].Acquired && value > 0.97f)
-            {
-                CheckerComponent.newSpawnLoot("worker", inst.gameObject);
-            }
-        }
-
         [HarmonyPatch(typeof(RoslockWorker), nameof(RoslockWorker.Die))]
         [HarmonyPrefix]
         public static bool Die(RoslockWorker __instance)
@@ -48,7 +40,6 @@ namespace Randomizer
             Vector2 v2 = new Vector2(__instance.transform.position.x + num2, __instance.transform.position.y + 1.6f);
             UnityEngine.Object.Instantiate<GameObject>(global.afx.yellowgibsparts, v2, Quaternion.identity);
             allfx afx = global.afx;
-            WorkerPatch.newLoot(__instance);
             __instance.dc.EnemyDeath();
             global.statstat.gsfx.PlaySplat(__instance.transform.position, 0.55f, 0.95f, 0.1f, 1f);
             global.statstat.gsfx.PlayAnySound(__instance.mutatesound, __instance.transform.position, 1f, 1f, 0f, 0.5f);
