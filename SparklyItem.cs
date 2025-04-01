@@ -14,12 +14,36 @@ using System.Net.NetworkInformation;
 using Cpp2IL.Core.Extensions;
 using HarmonyLib;
 using System.Net;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Randomizer
 {
     public class SparklyItemPatch : MonoBehaviour
     {
+
+        
         [HarmonyPatch(typeof(SparklyItem), nameof(SparklyItem.Update))]
+        [HarmonyPrefix]
+        public static bool Update(SparklyItem __instance)
+        {
+            if (__instance.it.executed == 1 && !__instance.dead)
+            {
+                RandomizerItem[] items = __instance.gameObject.GetComponentsInParent<RandomizerItem>(true);
+                RandomizerItem item = null;
+                if (items.Length > 0) {
+                    item = items[0];
+                }
+                if ( item != null && item.name == "RandomizerItem") {
+                    System.Console.WriteLine("Randomizer Item Grabbed");
+                    RandomizerItem.saveToFile(true, item.Name);
+                    UnityEngine.Object.Destroy(item);
+                }
+            }
+            
+            return true;
+        }
+        /*[HarmonyPatch(typeof(SparklyItem), nameof(SparklyItem.Update))]
         [HarmonyPrefix]
         public static bool Update(SparklyItem __instance)
         {
@@ -28,8 +52,7 @@ namespace Randomizer
                 {
                     __instance.it.executed = 0;
                     __instance.dead = true;
-                    RandomizerItem item = __instance.gameObject.GetComponentsInParent<RandomizerItem>(true)[0];
-
+                    
                     if (__instance.SetWorldStateArray >= 0)
                     {
                         global.statstat.thedata.MiscWorldState[__instance.SetWorldStateArray].Value = __instance.SetWorldStateValue;
@@ -38,6 +61,7 @@ namespace Randomizer
                     {
                         global.statstat.thedata.ItemPickups[__instance.arrayNumber].Value = 1f;
                     }
+
                     __instance.it.RemoveSelf();
                     if (__instance.Module)
                     {
@@ -60,15 +84,13 @@ namespace Randomizer
                     {
                         global.statstat.GainItem(__instance.itemNumber);
                     }
-                    __instance.StartCoroutine(__instance.unsuspend());
-                    if ( item != null && item.name == "RandomizerItem") {
-                        System.Console.WriteLine("Randomizer Item Grabbed");
-                        RandomizerItem.saveToFile(true, item.Name);
-                        UnityEngine.Object.Destroy(item);
-                    }
+
+                    var _base = (MonoBehaviour)__instance;
+                    _base.StartCoroutine(__instance.unsuspend());
+                    
                 }
             return false;
-        }
+        }*/
     }
 }
 

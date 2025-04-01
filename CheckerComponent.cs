@@ -14,6 +14,10 @@ using System.Net.NetworkInformation;
 using Cpp2IL.Core.Extensions;
 using HarmonyLib;
 using System.Net;
+using System.Numerics;
+using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
+using Quaternion = UnityEngine.Quaternion;
 
 namespace Randomizer
 {
@@ -27,6 +31,7 @@ namespace Randomizer
         public int itemNumber;
         public int moduleNumber;
         public SparklyItem.modtype modType;
+        public UnityEngine.Vector2 position;
 
         public RandomizerLocation setName(string name){
             this.name = name;
@@ -57,8 +62,13 @@ namespace Randomizer
             return this;
         }
 
-        public RandomizerLocation setModType(SparklyItem.modtype mod) {
-            this.modType = mod;
+        public RandomizerLocation setModType(int mod) {
+            this.modType = (SparklyItem.modtype)mod;
+            return this;
+        }
+
+        public RandomizerLocation setPosition(Vector2 vec) {
+            this.position = vec;
             return this;
         }
 
@@ -69,45 +79,43 @@ namespace Randomizer
 
         public static List<RandomizerLocation> locations = new List<RandomizerLocation>() {
             new RandomizerLocation().setName("surfacehuntergirl").setItem(true).setItemNum(0).setArray(0)
-            .setModule(false).setModuleNum(0).setModType(SparklyItem.modtype.Special),
+            .setModule(false).setModuleNum(0).setModType(2),
             new RandomizerLocation().setName("devilwink").setItem(false).setItemNum(0).setArray(94)
-            .setModule(true).setModuleNum(12).setModType(SparklyItem.modtype.Modifier),
+            .setModule(true).setModuleNum(12).setModType(1),
             new RandomizerLocation().setName("brad").setItem(false).setItemNum(0).setArray(88).setModule(true)
-            .setModType(SparklyItem.modtype.Weapons).setModuleNum(3),
+            .setModType(0).setModuleNum(3),
             new RandomizerLocation().setName("alienblob").setItem(false).setItemNum(0).setArray(92).setModule(true)
-            .setModType(SparklyItem.modtype.Weapons).setModuleNum(14),
+            .setModType(0).setModuleNum(14),
             new RandomizerLocation().setName("bigheadboss").setItem(false).setItemNum(0).setArray(84).setModule(true)
-            .setModType(SparklyItem.modtype.Modifier).setModuleNum(6),
+            .setModType(1).setModuleNum(16),
             new RandomizerLocation().setName("fistomini").setItem(false).setItemNum(0).setArray(84).setModule(true)
-            .setModType(SparklyItem.modtype.Modifier).setModuleNum(4),
+            .setModType(1).setModuleNum(4),
             new RandomizerLocation().setName("fistorandom1").setItem(false).setItemNum(0).setArray(84).setModule(true)
-            .setModType(SparklyItem.modtype.Modifier).setModuleNum(15),
+            .setModType(1).setModuleNum(15),
             new RandomizerLocation().setName("fistorandom2").setItem(false).setItemNum(0).setArray(84).setModule(true)
-            .setModType(SparklyItem.modtype.Special).setModuleNum(1),
+            .setModType(2).setModuleNum(1),
             new RandomizerLocation().setName("flailboss").setItem(false).setItemNum(0).setArray(15).setModule(true)
-            .setModType(SparklyItem.modtype.Modifier).setModuleNum(11),
+            .setModType(1).setModuleNum(11),
             new RandomizerLocation().setName("henriettmutated").setItem(false).setItemNum(0).setArray(90).setModule(true)
-            .setModType(SparklyItem.modtype.Special).setModuleNum(4),
+            .setModType(2).setModuleNum(4),
             new RandomizerLocation().setName("newmama").setItem(false).setItemNum(0).setArray(34).setModule(true)
-            .setModType(SparklyItem.modtype.Special).setModuleNum(2),
+            .setModType(2).setModuleNum(2),
             new RandomizerLocation().setName("newspikemouth1").setItem(false).setItemNum(0).setArray(34).setModule(true)
-            .setModType(SparklyItem.modtype.Modifier).setModuleNum(15),
+            .setModType(1).setModuleNum(15),
             new RandomizerLocation().setName("newspikemouth2").setItem(false).setItemNum(0).setArray(34).setModule(true)
-            .setModType(SparklyItem.modtype.Special).setModuleNum(1),
+            .setModType(2).setModuleNum(1),
             new RandomizerLocation().setName("phz").setItem(false).setItemNum(0).setArray(93).setModule(true)
-            .setModType(SparklyItem.modtype.Weapons).setModuleNum(11),
+            .setModType(0).setModuleNum(11),
             new RandomizerLocation().setName("warrior1").setItem(false).setItemNum(0).setArray(93).setModule(true)
-            .setModType(SparklyItem.modtype.Special).setModuleNum(7),
+            .setModType(2).setModuleNum(7),
             new RandomizerLocation().setName("warrior2").setItem(false).setItemNum(0).setArray(93).setModule(true)
-            .setModType(SparklyItem.modtype.Special).setModuleNum(8),
+            .setModType(2).setModuleNum(8),
             new RandomizerLocation().setName("worker").setItem(false).setItemNum(0).setArray(93).setModule(true)
-            .setModType(SparklyItem.modtype.Special).setModuleNum(6),
+            .setModType(2).setModuleNum(6),
             new RandomizerLocation().setName("slimedude").setItem(false).setItemNum(0).setArray(91).setModule(true)
-            .setModType(SparklyItem.modtype.Weapons).setModuleNum(13),
+            .setModType(0).setModuleNum(13),
             new RandomizerLocation().setName("spikerunner").setItem(false).setItemNum(0).setArray(22).setModule(true)
-            .setModType(SparklyItem.modtype.Weapons).setModuleNum(12),
-            new RandomizerLocation().setName("NewTestItem").setItem(true).setItemNum(43).setArray(22).setModule(false)
-            .setModType(SparklyItem.modtype.Weapons).setModuleNum(12),
+            .setModType(0).setModuleNum(12),
         };
 
         public static void newSpawnLoot(string name, GameObject instance) {
@@ -120,7 +128,7 @@ namespace Randomizer
 
         public static void spawnloot(GameObject inst, bool Module, bool Item, int arrayNumber, int itemNumber, int moduleNumber, SparklyItem.modtype moduleType)
         {
-            Vector2 v2 = new Vector2(inst.transform.position.x, inst.transform.position.y + 3f);
+            Vector2 v2 = new UnityEngine.Vector2(inst.transform.position.x, inst.transform.position.y + 3f);
             SparklyItem sparklyItem2 = UnityEngine.Object.Instantiate<SparklyItem>(global.afx.itemdrop, v2, Quaternion.identity);
             sparklyItem2.wasdropped = true;
             sparklyItem2.Item = Item;
