@@ -1,0 +1,1671 @@
+{
+  "EnemyDrops": [
+    {
+      "Name": "surfacehuntergirl",
+      "Item": {
+        "arrayNumber": 0,
+        "Item": true,
+        "itemNumber": 0,
+        "module": false,
+        "moduleNumber": 0,
+        "modType": "Special"
+      }
+    },
+    {
+      "Name": "devilwink",
+      "Item": {
+        "arrayNumber": 94,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 12,
+        "modType": "Modifier"
+      }
+    },
+    {
+      "Name": "brad",
+      "Item": {
+        "arrayNumber": 88,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 3,
+        "modType": "Weapons"
+      }
+    },
+    {
+      "Name": "alienblob",
+      "Item": {
+        "arrayNumber": 92,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 14,
+        "modType": "Weapons"
+      }
+    },
+    {
+      "Name": "bigheadboss",
+      "Item": {
+        "arrayNumber": 88,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 16,
+        "modType": "Modifier"
+      }
+    },
+    {
+      "Name": "fistomini",
+      "Item": {
+        "arrayNumber": 84,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 4,
+        "modType": "Modifier"
+      }
+    },
+    {
+      "Name": "flailboss",
+      "Item": {
+        "arrayNumber": 15,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 11,
+        "modType": "Modifier"
+      }
+    },
+    {
+      "Name": "henriettmutated",
+      "Item": {
+        "arrayNumber": 90,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 4,
+        "modType": "Special"
+      }
+    },
+    {
+      "Name": "newmama",
+      "Item": {
+        "arrayNumber": 34,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 2,
+        "modType": "Special"
+      }
+    },
+    {
+      "Name": "phz",
+      "Item": {
+        "arrayNumber": 93,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 11,
+        "modType": "Weapons"
+      }
+    },
+    {
+      "Name": "slimedude",
+      "Item": {
+        "arrayNumber": 91,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 13,
+        "modType": "Weapons"
+      }
+    },
+    {
+      "Name": "spikerunner",
+      "Item": {
+        "arrayNumber": 22,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 12,
+        "modType": "Weapons"
+      }
+    },
+    {
+      "Name": "sproutergirl",
+      "Item": {
+        "arrayNumber": 13,
+        "Item": true,
+        "itemNumber": 0,
+        "module": false,
+        "moduleNumber": 0,
+        "modType": "Modifier"
+      }
+    },
+    {
+      "Name": "walker5",
+      "Item": {
+        "arrayNumber": 13,
+        "Item": true,
+        "itemNumber": 7,
+        "module": false,
+        "moduleNumber": 12,
+        "modType": "Modifier"
+      }
+    },
+    {
+      "Name": "leaf",
+      "Item": {
+        "arrayNumber": 13,
+        "Item": false,
+        "itemNumber": 0,
+        "module": true,
+        "moduleNumber": 1,
+        "modType": "Weapons"
+      }
+    }
+  ],
+  "Rooms": [
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 35,
+          "itemNumber": 0,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "0/doopy3",
+          "position": "(-120.4, -1.6)"
+        }
+      ],
+      "Name": "doopy3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 38,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "1/dp11bb",
+          "position": "(119.3, -84.6)"
+        }
+      ],
+      "Name": "dp11bb"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 24,
+          "itemNumber": 7,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "2/rdb1",
+          "position": "(22.9, -37.1)"
+        }
+      ],
+      "Name": "rdb1"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 45,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "3/rdb1b",
+          "position": "(88.7, -50.1)"
+        }
+      ],
+      "Name": "rdb1b"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 31,
+          "itemNumber": 35,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "4/rdb1c",
+          "position": "(120.2, -38.8)"
+        }
+      ],
+      "Name": "rdb1c"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 39,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "5/rdb2",
+          "position": "(129.2, -3.5)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 25,
+          "itemNumber": 15,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "7/rdb2",
+          "position": "(54.0, -78.4)"
+        }
+      ],
+      "Name": "rdb2"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 30,
+          "itemNumber": 7,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "6/rdb2b",
+          "position": "(46.5, -52.4)"
+        }
+      ],
+      "Name": "rdb2b"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 40,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "8/rdb3",
+          "position": "(146.4, -37.1)"
+        }
+      ],
+      "Name": "rdb3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 42,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "9/fa4",
+          "position": "(107.3, -61.2)"
+        },
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 41,
+          "itemNumber": 12,
+          "modType": "Weapons",
+          "moduleNumber": 9,
+          "Name": "10/fa4",
+          "position": "(221.5, -48.9)"
+        }
+      ],
+      "Name": "fa4"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 26,
+          "itemNumber": 37,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "11/dp1",
+          "position": "(-81.3, -48.8)"
+        }
+      ],
+      "Name": "dp1"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 44,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "12/fa3",
+          "position": "(158.4, 13.9)"
+        }
+      ],
+      "Name": "fa3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 79,
+          "itemNumber": 7,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "13/saps1",
+          "position": "(64.5, -36.8)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 78,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "14/saps1",
+          "position": "(86.6, -70.1)"
+        }
+      ],
+      "Name": "saps1"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 21,
+          "itemNumber": 16,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "16/gm1",
+          "position": "(12.6, -35.2)"
+        }
+      ],
+      "Name": "gm1"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 49,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "17/misty3",
+          "position": "(59.8, -82.1)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 50,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "18/misty3",
+          "position": "(149.9, -82.1)"
+        }
+      ],
+      "Name": "misty3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 29,
+          "itemNumber": 14,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "19/misty2",
+          "position": "(156.1, -63.1)"
+        }
+      ],
+      "Name": "misty2"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 52,
+          "itemNumber": 15,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "20/misty4",
+          "position": "(151.0, -55.8)"
+        },
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 51,
+          "itemNumber": 0,
+          "modType": "Special",
+          "moduleNumber": 0,
+          "Name": "21/misty4",
+          "position": "(-13.0, -62.8)"
+        }
+      ],
+      "Name": "misty4"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 14,
+          "itemNumber": 15,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "22/dp2",
+          "position": "(-130.0, -10.1)"
+        }
+      ],
+      "Name": "dp2"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 53,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "23/misty7",
+          "position": "(122.4, -83.7)"
+        }
+      ],
+      "Name": "misty7"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 59,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "24/misty9",
+          "position": "(107.6, -62.3)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 60,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "25/misty9",
+          "position": "(135.5, -62.6)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 58,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "26/misty9",
+          "position": "(96.7, -62.3)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 57,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "27/misty9",
+          "position": "(84.6, -62.3)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 55,
+          "itemNumber": 32,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "28/misty9",
+          "position": "(75.2, -62.2)"
+        }
+      ],
+      "Name": "misty9"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 48,
+          "itemNumber": 19,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "29/misty12",
+          "position": "(92.5, -63.2)"
+        }
+      ],
+      "Name": "misty12"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 63,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "30/misty11",
+          "position": "(18.6, -36.3)"
+        }
+      ],
+      "Name": "misty11"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 61,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "31/misty10",
+          "position": "(66.2, 50.8)"
+        }
+      ],
+      "Name": "misty10"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 62,
+          "itemNumber": 15,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "32/misty13",
+          "position": "(51.0, -36.0)"
+        }
+      ],
+      "Name": "misty13"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 2,
+          "itemNumber": 9,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "33/dp7",
+          "position": "(5.7, -19.4)"
+        }
+      ],
+      "Name": "dp7"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 82,
+          "itemNumber": 15,
+          "modType": "Weapons",
+          "moduleNumber": 15,
+          "Name": "34/rdalpha4",
+          "position": "(158.7, -29.4)"
+        }
+      ],
+      "Name": "rdalpha4"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 36,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "35/dp3b",
+          "position": "(56.1, -18.0)"
+        }
+      ],
+      "Name": "dp3b"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 46,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "36/leaf6",
+          "position": "(-17.1, -81.1)"
+        },
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 47,
+          "itemNumber": 9,
+          "modType": "Weapons",
+          "moduleNumber": 7,
+          "Name": "37/leaf6",
+          "position": "(-32.9, -67.5)"
+        }
+      ],
+      "Name": "leaf6"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 94,
+          "itemNumber": 9,
+          "modType": "Modifier",
+          "moduleNumber": 12,
+          "Name": "38/saps2",
+          "position": "(155.7, -45.9)"
+        }
+      ],
+      "Name": "saps2"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 101,
+          "itemNumber": 66,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "39/lands4",
+          "position": "(155.0, -72.2)"
+        }
+      ],
+      "Name": "lands4"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 73,
+          "itemNumber": 9,
+          "modType": "Modifier",
+          "moduleNumber": 1,
+          "Name": "40/gm3",
+          "position": "(131.9, 53.0)"
+        }
+      ],
+      "Name": "gm3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 27,
+          "itemNumber": 9,
+          "modType": "Modifier",
+          "moduleNumber": 10,
+          "Name": "41/dp19",
+          "position": "(95.1, -38.4)"
+        }
+      ],
+      "Name": "dp19"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 64,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "42/dp18",
+          "position": "(-41.1, -45.0)"
+        }
+      ],
+      "Name": "dp18"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 3,
+          "itemNumber": 16,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "43/dp11b",
+          "position": "(71.7, -33.7)"
+        }
+      ],
+      "Name": "dp11b"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 33,
+          "itemNumber": 16,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "44/dp6",
+          "position": "(161.5, -11.6)"
+        }
+      ],
+      "Name": "dp6"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 20,
+          "itemNumber": 14,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "45/ed1r",
+          "position": "(95.0, -39.4)"
+        }
+      ],
+      "Name": "ed1r"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 32,
+          "itemNumber": 5,
+          "modType": "Modifier",
+          "moduleNumber": 5,
+          "Name": "46/rdb6",
+          "position": "(182.0, -74.2)"
+        }
+      ],
+      "Name": "rdb6"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 74,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "47/sf6",
+          "position": "(79.0, -37.0)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 75,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "48/sf6",
+          "position": "(83.6, -83.8)"
+        }
+      ],
+      "Name": "sf6"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 77,
+          "itemNumber": 16,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "49/sfdeep3",
+          "position": "(-10.1, -63.9)"
+        }
+      ],
+      "Name": "sfdeep3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 4,
+          "itemNumber": 5,
+          "modType": "Special",
+          "moduleNumber": 5,
+          "Name": "50/ed2",
+          "position": "(298.3, -56.8)"
+        }
+      ],
+      "Name": "ed2"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 11,
+          "itemNumber": 16,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "51/ed3",
+          "position": "(78.0, 35.6)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 6,
+          "itemNumber": 7,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "52/ed3",
+          "position": "(164.1, -64.4)"
+        }
+      ],
+      "Name": "ed3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 86,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "53/ed4",
+          "position": "(64.5, -41.5)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 7,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "54/ed4",
+          "position": "(-38.2, -30.1)"
+        }
+      ],
+      "Name": "ed4"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 37,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "55/dp5",
+          "position": "(105.2, 0.1)"
+        }
+      ],
+      "Name": "dp5"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 83,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "56/ed2b",
+          "position": "(45.4, -34.6)"
+        },
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 5,
+          "itemNumber": 0,
+          "modType": "Modifier",
+          "moduleNumber": 3,
+          "Name": "57/ed2b",
+          "position": "(84.7, -50.9)"
+        }
+      ],
+      "Name": "ed2b"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 8,
+          "itemNumber": 14,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "59/ed5",
+          "position": "(-31.3, -61.5)"
+        }
+      ],
+      "Name": "ed5"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 99,
+          "itemNumber": 66,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "60/ed7",
+          "position": "(107.7, -66.3)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 98,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "61/ed7",
+          "position": "(66.6, -44.9)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 96,
+          "itemNumber": 66,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "62/ed7",
+          "position": "(70.0, -45.0)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 97,
+          "itemNumber": 66,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "63/ed7",
+          "position": "(55.2, -80.9)"
+        }
+      ],
+      "Name": "ed7"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 100,
+          "itemNumber": 66,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "64/ed8",
+          "position": "(84.2, -36.8)"
+        }
+      ],
+      "Name": "ed8"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 71,
+          "itemNumber": 12,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "65/jp1",
+          "position": "(75.1, -41.4)"
+        }
+      ],
+      "Name": "jp1"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 9,
+          "itemNumber": 4,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "66/dp16",
+          "position": "(49.8, -15.2)"
+        }
+      ],
+      "Name": "dp16"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 16,
+          "itemNumber": 16,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "67/jp13",
+          "position": "(24.6, -65.6)"
+        }
+      ],
+      "Name": "jp13"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 17,
+          "itemNumber": 15,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "68/jp3",
+          "position": "(47.5, -0.8)"
+        }
+      ],
+      "Name": "jp3"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 68,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "69/jp3b",
+          "position": "(85.3, -78.2)"
+        }
+      ],
+      "Name": "jp3b"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 18,
+          "itemNumber": 33,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "70/jp3e",
+          "position": "(90.5, -81.0)"
+        }
+      ],
+      "Name": "jp3e"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 65,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "71/jp6",
+          "position": "(87.8, -44.2)"
+        }
+      ],
+      "Name": "jp6"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 67,
+          "itemNumber": 7,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "72/jps4",
+          "position": "(86.5, -63.3)"
+        }
+      ],
+      "Name": "jps4"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 66,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "73/jp5",
+          "position": "(49.1, 12.4)"
+        }
+      ],
+      "Name": "jp5"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 19,
+          "itemNumber": 14,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "74/jp9",
+          "position": "(121.8, -63.7)"
+        }
+      ],
+      "Name": "jp9"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 87,
+          "itemNumber": 9,
+          "modType": "Special",
+          "moduleNumber": 3,
+          "Name": "75/zh1",
+          "position": "(11.3, -68.4)"
+        }
+      ],
+      "Name": "zh1"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 89,
+          "itemNumber": 31,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "76/lands6",
+          "position": "(179.3, -81.1)"
+        }
+      ],
+      "Name": "lands6"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 43,
+          "itemNumber": 64,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "77/dp17",
+          "position": "(-17.8, -4.2)"
+        },
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 10,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "84/dp17",
+          "position": "(-51.0, 14.1)"
+        }
+      ],
+      "Name": "dp17"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 70,
+          "itemNumber": 65,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "78/jp20",
+          "position": "(22.6, -50.1)"
+        }
+      ],
+      "Name": "jp20"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 85,
+          "itemNumber": 66,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "79/gamma7",
+          "position": "(83.0, -63.2)"
+        }
+      ],
+      "Name": "gamma7"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 76,
+          "itemNumber": 66,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "80/sf5",
+          "position": "(77.0, -12.9)"
+        }
+      ],
+      "Name": "sf5"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 72,
+          "itemNumber": 29,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "81/rdb5",
+          "position": "(83.2, 12.6)"
+        }
+      ],
+      "Name": "rdb5"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": false,
+          "Module": true,
+          "arrayNumber": 28,
+          "itemNumber": 9,
+          "modType": "Modifier",
+          "moduleNumber": 9,
+          "Name": "82/dpb5",
+          "position": "(101.4, -8.4)"
+        }
+      ],
+      "Name": "dpb5"
+    },
+    {
+      "Enemies": null,
+      "Items": [
+        {
+          "Item": true,
+          "Module": false,
+          "arrayNumber": 54,
+          "itemNumber": 14,
+          "modType": "Weapons",
+          "moduleNumber": 0,
+          "Name": "83/misty8",
+          "position": "(153.9, -39.1)"
+        }
+      ],
+      "Name": "misty8"
+    }
+  ],
+  "Vendors": [
+    {
+      "Name": "Mabec",
+      "Items": [
+          {
+            "Class": "module",
+            "Cost": 1250,
+            "Desc": "desc_heartofsteadiness",
+            "ItemNumber": -1,
+            "ModuleNumber": 2,
+            "ModuleType": "mod",
+            "Name": "ItemName_18",
+            "Stock": 1,
+            "WorldState": 0
+          },
+          {
+            "Class": "module",
+            "Cost": 800,
+            "Desc": "desc_harmonizer",
+            "ItemNumber": -1,
+            "ModuleNumber": 13,
+            "ModuleType": "mod",
+            "Name": "ItemName_29",
+            "Stock": 1,
+            "WorldState": 0
+          },
+          {
+            "Class": "module",
+            "Cost": 3500,
+            "Desc": "desc_triplejump",
+            "ItemNumber": -1,
+            "ModuleNumber": 17,
+            "ModuleType": "mod",
+            "Name": "ItemName_33",
+            "Stock": 1,
+            "WorldState": 61
+          },
+          {
+            "Class": "module",
+            "Cost": 5000,
+            "Desc": "desc_firefly",
+            "ItemNumber": -1,
+            "ModuleNumber": 5,
+            "ModuleType": "weapon",
+            "Name": "ItemName_6",
+            "Stock": 1,
+            "WorldState": 60
+          },
+          {
+            "Class": "equippable",
+            "Cost": 1500,
+            "Desc": "itemdesc_dolly",
+            "ItemNumber": 26,
+            "ModuleNumber": 0,
+            "ModuleType": "",
+            "Name": "ItemName_45",
+            "Stock": 1,
+            "WorldState": 30
+          },
+          {
+            "Class": "other",
+            "Cost": 500,
+            "Desc": "itemdesc_gizmo",
+            "ItemNumber": 67,
+            "ModuleNumber": 0,
+            "ModuleType": "",
+            "Name": "ItemName_64",
+            "Stock": 1,
+            "WorldState": 42
+          },
+          {
+            "Class": "module",
+            "Cost": 1000,
+            "Desc": "desc_planter",
+            "ItemNumber": -1,
+            "ModuleNumber": 4,
+            "ModuleType": "weapon",
+            "Name": "ItemName_5",
+            "Stock": 1,
+            "WorldState": 59
+          }
+      ]
+    },
+    {
+      "Name": "Bill",
+      "Items": [
+        
+            {
+              "Class": "equippable",
+              "Cost": 200,
+              "Desc": "itemdesc_shield",
+              "ItemNumber": 1,
+              "ModuleNumber": 0,
+              "ModuleType": "",
+              "Name": "ItemName_44",
+              "Stock": 1,
+              "WorldState": 0
+            },
+            {
+              "Class": "consumable",
+              "Cost": 8000,
+              "Desc": "itemdesc_godseedgreen",
+              "ItemNumber": 31,
+              "ModuleNumber": 0,
+              "ModuleType": "",
+              "Name": "ItemName_51",
+              "Stock": 1,
+              "WorldState": 61
+            },
+            {
+              "Class": "module",
+              "Cost": 1000,
+              "Desc": "desc_insight",
+              "ItemNumber": -1,
+              "ModuleNumber": 16,
+              "ModuleType": "mod",
+              "Name": "ItemName_32",
+              "Stock": 1,
+              "WorldState": 0
+            },
+            {
+              "Class": "consumable",
+              "Cost": 100,
+              "Desc": "itemdesc_healthnug",
+              "ItemNumber": 39,
+              "ModuleNumber": 0,
+              "ModuleType": "",
+              "Name": "ItemName_52",
+              "Stock": 10,
+              "WorldState": 0
+            },
+            {
+              "Class": "consumable",
+              "Cost": 50,
+              "Desc": "itemdesc_energynug",
+              "ItemNumber": 40,
+              "ModuleNumber": 0,
+              "ModuleType": "",
+              "Name": "ItemName_53",
+              "Stock": 10,
+              "WorldState": 0
+            },
+            {
+              "Class": "consumable",
+              "Cost": 50,
+              "Desc": "itemdesc_stamnug",
+              "ItemNumber": 41,
+              "ModuleNumber": 0,
+              "ModuleType": "",
+              "Name": "ItemName_54",
+              "Stock": 10,
+              "WorldState": 0
+            },
+            {
+              "Class": "other",
+              "Cost": 2000,
+              "Desc": "itemdesc_healingcore",
+              "ItemNumber": 7,
+              "ModuleNumber": 0,
+              "ModuleType": "",
+              "Name": "ItemName_57",
+              "Stock": 1,
+              "WorldState": 60
+            },
+            {
+              "Class": "other",
+              "Cost": 2500,
+              "Desc": "itemdesc_coreamp",
+              "ItemNumber": 29,
+              "ModuleNumber": 0,
+              "ModuleType": "",
+              "Name": "ItemName_61",
+              "Stock": 1,
+              "WorldState": 60
+            },
+            {
+              "Class": "module",
+              "Cost": 1000,
+              "Desc": "desc_scatterburst",
+              "ItemNumber": -1,
+              "ModuleNumber": 2,
+              "ModuleType": "weapon",
+              "Name": "ItemName_3",
+              "Stock": 1,
+              "WorldState": 59
+            },
+            {
+              "Class": "module",
+              "Cost": 1000,
+              "Desc": "desc_longshot",
+              "ItemNumber": -1,
+              "ModuleNumber": 7,
+              "ModuleType": "mod",
+              "Name": "ItemName_23",
+              "Stock": 1,
+              "WorldState": 60
+            }
+        
+      ]
+    }
+  ],
+  "DialogueItems": [
+    {
+      "Name": "corebot",
+      "Item": {
+        "arrayNumber": 13,
+        "Item": true,
+        "itemNumber": 7,
+        "Module": false,
+        "moduleNumber": 12,
+        "modType": "Modifier"
+      }
+    },
+    {
+        "Name": "Gambler",
+        "Item": {
+          "arrayNumber": 22,
+          "Item": true,
+          "itemNumber": 53,
+          "Module": false,
+          "moduleNumber": 12,
+          "modType": "Modifier"
+        }
+    },
+    {
+        "Name": "GiliWorld5",
+        "Item": {
+          "arrayNumber": 22,
+          "Item": true,
+          "itemNumber": 34,
+          "Module": false,
+          "moduleNumber": 12,
+          "modType": "Modifier"
+        }
+    },
+    {
+        "Name": "MollyCamp3",
+        "Item": {
+          "arrayNumber": 22,
+          "Item": false,
+          "itemNumber": 53,
+          "Module": true,
+          "moduleNumber": 8,
+          "modType": "Modifier"
+        }
+    },
+    {
+        "Name": "MollyGen",
+        "Item": {
+          "arrayNumber": 22,
+          "Item": true,
+          "itemNumber": 46,
+          "Module": false,
+          "moduleNumber": 12,
+          "modType": "Modifier"
+        }
+    },
+    {
+        "Name": "Relic",
+        "Item": {
+          "arrayNumber": 22,
+          "Item": true,
+          "itemNumber": 48,
+          "Module": false,
+          "moduleNumber": 12,
+          "modType": "Modifier"
+        }
+    },
+    {
+        "Name": "Rime",
+        "Item": {
+          "arrayNumber": 22,
+          "Item": false,
+          "itemNumber": 53,
+          "Module": true,
+          "moduleNumber": 14,
+          "modType": "Modifier"
+        }
+    }
+  ]
+}

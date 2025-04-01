@@ -26,11 +26,9 @@ namespace Randomizer
             __instance.dc.SpawnBots(UnityEngine.Random.Range(26, 26), "medium", new Vector2(__instance.transform.position.x, __instance.transform.position.y + 4f), 2f, 1f);
             __instance.dc.SpawnBots(UnityEngine.Random.Range(9, 9), "small", new Vector2(__instance.transform.position.x, __instance.transform.position.y + 4f), 2f, 1f);
             __instance.burnloop.Stop();
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "devilwink";
-            });
-            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
-            __instance.dc.EnemySpecialDeath(true);
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("devilwink", "enemy");
+            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
+             __instance.dc.EnemySpecialDeath(true);
             if (__instance.dc.facingright)
             {
                 global.statstat.thedata.OtherData[108] = 1;

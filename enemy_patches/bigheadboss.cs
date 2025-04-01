@@ -31,11 +31,9 @@ namespace Randomizer
 
         static void MySpawnLoot() {
             GameObject elby = global.elby;
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "bigheadboss";
-            });
-            CheckerComponent.spawnloot(elby, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
-        }
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("bigheadboss", "enemy");
+            CheckerComponent.spawnloot(elby, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
+         }
 
         [HarmonyPatch(typeof(bigheadboss), nameof(bigheadboss.SpawnLoot))]
         [HarmonyPostfix]

@@ -44,10 +44,8 @@ namespace Randomizer
             }
             if (__instance.isminiboss)
             {
-                RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                    return _loc.name == "fistomini";
-                });
-                CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType); 
+                RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("fistomini", "enemy");
+                CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
             }
             if (__instance.bloodcloud)
             {

@@ -23,9 +23,7 @@ namespace Randomizer
         [HarmonyPrefix]
         public static bool Update(corebotpickup __instance)
         {
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "coreBot";
-            });
+
             if (__instance.it.executed == 1 && __instance.alive)
             {
                 __instance.alive = false;
@@ -34,20 +32,7 @@ namespace Randomizer
                 __instance.it.executed = 0;
                 __instance.it.RemoveSelf();
                 __instance.StartCoroutine(__instance.unsuspend());
-                if(loc.Item) {
-                    global.statstat.GainItem(loc.itemNumber);
-                } else {
-                    string modtype = "";
-                    if (loc.modType == SparklyItem.modtype.Weapons) {
-                        modtype = "weapon";
-                    } else if (loc.modType == SparklyItem.modtype.Modifier) {
-                        modtype = "mod";
-                    }
-                    else if(loc.modType == SparklyItem.modtype.Special) {
-                        modtype = "special";
-                    }
-                    global.statstat.GainModule(loc.moduleNumber, modtype, false);
-                }
+                Randomizer.RandomzierLayout.RandomizerGiveItem("corebot","dial");
                 __instance.coreglow.Play("corebotglowanim2", 0);
             }
             

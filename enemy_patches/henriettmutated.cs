@@ -38,10 +38,8 @@ namespace Randomizer
             __instance.fightsource.loop = false;
             __instance.fightsource.Play();
             __instance.SpawnDoll();
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "henriettmutated";
-            });
-            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("leaf", "enemy");
+            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
  
             allfx afx = global.afx;
             float num = 0f;

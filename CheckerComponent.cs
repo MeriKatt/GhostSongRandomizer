@@ -165,11 +165,9 @@ namespace Randomizer
         };
 
         public static void newSpawnLoot(string name, GameObject instance) {
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == name;
-            });
-            CheckerComponent.spawnloot(instance, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
-
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy(name, "enemy");
+            CheckerComponent.spawnloot(instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
+ 
         }
 
         public static void spawnloot(GameObject inst, bool Module, bool Item, int arrayNumber, int itemNumber, int moduleNumber, SparklyItem.modtype moduleType)

@@ -25,10 +25,8 @@ namespace Randomizer
         {
             global.statstat.gsfx.PlayBossDeathChime(__instance.transform.position, 0f);
             __instance.dead = true;
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "surfacehuntergirl";
-            });
-            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("surfacehuntergirl", "enemy");
+            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
             __instance.gibHolder.Go(__instance.dc.DeathForce);
             float num = 0.2f;
             if (__instance.transform.localScale.x < 0f)

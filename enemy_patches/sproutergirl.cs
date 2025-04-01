@@ -26,10 +26,9 @@ namespace Randomizer
             SparklyItem item = GameObject.FindObjectOfType<SparklyItem>();
             UnityEngine.Object.Destroy(item.gameObject);
             GameObject elby = global.elby;
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "sproutergirl";
-            });
-            CheckerComponent.spawnloot(elby, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("sproutergirl", "enemy");
+            CheckerComponent.spawnloot(elby, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
+ 
         }
     }
 }

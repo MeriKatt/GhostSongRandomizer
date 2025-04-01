@@ -28,6 +28,8 @@ using System.Text;
 using Il2CppInterop.Generator.Extensions;
 using Il2CppSystem.Security.Util;
 using System.Net;
+using System.Reflection;
+using MonoMod.Utils;
 
 
 
@@ -66,26 +68,17 @@ public class BRandomizerLocationInfo
     public string item_position { get; set; }
 }
 
-
-
-
-
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BasePlugin
 {
-
-    public static RandomizerLocations AllLocations = new RandomizerLocations();
+    public static Randomizer.RandomzierLayout layout = new RandomzierLayout();
     List<GameObject> objects = new List<GameObject>();
-    status status;
     internal static new ManualLogSource Log;
-    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RandomizerLocations));
+    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RandomzierLayout));
 
-    private void spawnRandomizerItem(string Name, Scene scene, Vector3 pos) {
+    private void spawnRandomizerItem(string Name, Scene scene, Vector3 pos, RandomizerItemInfo loc) {
         if (RandomizerItem.loadFromFile(Name) == false)
         {
-            var loc = CheckerComponent.locations.Find((RandomizerLocation loc) => {
-                return loc.name == Name;
-            });
             var go = new GameObject("RandomizerItem");
             go.AddComponent<RandomizerItem>();
             RandomizerItem item = go.GetComponent<RandomizerItem>();
@@ -98,7 +91,7 @@ public class Plugin : BasePlugin
             item.item.Module = loc.Module;
             item.item.moduleNumber = loc.moduleNumber;
             item.item.arrayNumber = loc.arrayNumber;
-            item.item.moduleType = loc.modType;
+            item.item.moduleType = layout.GetModtypeFromString(loc.modType);
             item.pos = pos;
             item.scene = scene.name;
             item.wasCollected = RandomizerItem.loadFromFile(item.Name);
@@ -124,35 +117,20 @@ public class Plugin : BasePlugin
     }
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
-        status = Component.FindObjectOfType<status>();
-        if (status is not null) {
-            if (status.npcvd is not null ) {
-                vendordata item = status.npcvd.BillInventory[1];
-                if (item.ItemName != "Water Movement") {
-                    item.ItemName = "Water Movement";
-                    item.ItemNumber = 20;
-                    item.ReqWorldState = 0;
-                    item.Cost = 1;
-                    item.Stock = 1;
-                }
-                status.npcvd.BillInventory[1] = item;
-            }
-        }
         SparklyItem[] items = GameObject.FindObjectsOfType<SparklyItem>();
         foreach (SparklyItem item in items) {
             UnityEngine.Object.Destroy(item.gameObject);
         }
-        foreach( RandomizerLocation loc in CheckerComponent.locations) 
-        {
-            if (isItemInCurScene(scene.name, loc)) {
-                spawnRandomizerItem(loc.name, scene, new Vector3(loc.position.x, loc.position.y, 0));
-                System.Console.WriteLine("Location found, spawning it");
-            }  
+        List<RandomizerItemInfo> RandomizerItems = layout.GetRoomItems(scene.name);
+        if (RandomizerItems != null) {
+            foreach( RandomizerItemInfo loc in RandomizerItems) 
+            {
+                Vector2 pos = Plugin.strToVec2(loc.position);
+                spawnRandomizerItem(loc.Name, scene, new Vector3(pos.x, pos.y, 0), loc);
+                System.Console.WriteLine("Location found, spawning it"); 
+            }
         }
-
-        /*if (scene.name == "doopy3") {
-            spawnRandomizerItem("NewTestItem", scene, new Vector3(106.8151f, 8.6966f, 0));
-        }*/
+        
         GameObject versionnumber = GameObject.Find("Camera Holder");
         if (versionnumber != null) {
             Transform child = versionnumber.transform.Find("VersionNumber");
@@ -179,34 +157,67 @@ public class Plugin : BasePlugin
     public override void Load()
     {
 
-        Plugin.AllLocations = new RandomizerLocations();
-        string input = File.ReadAllText("./locations/AllLocations.json");
+        Plugin.layout = new RandomzierLayout();
+        string input = File.ReadAllText("./locations/DefaultLayout.json");
         using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
         {
-            Plugin.AllLocations = (RandomizerLocations)ser.ReadObject(ms);
+            Plugin.layout = (RandomzierLayout)ser.ReadObject(ms);
         }
-        List<BRandomizerLocationInfo> info_list = new List<BRandomizerLocationInfo>();
-        foreach(BRandomizerLocationInfo info in Plugin.AllLocations.locations) {
-            CheckerComponent.locations.Add(new RandomizerLocation().setName(info.Name)
-            .setItem(info.is_item == "True")
-            .setItemNum(int.Parse(info.item_number)).setArray(int.Parse(info.array_number)).setModule(info.is_module == "True")
-            .setModType(int.Parse(info.module_type)).setModuleNum(int.Parse(info.module_number)).setPosition(strToVec2(info.item_position)));
-            System.Console.WriteLine("Name of added:  " +CheckerComponent.locations.ElementAt(CheckerComponent.locations.Count - 1).name);
-        }
-        
-        
-        var ser_ = new DataContractJsonSerializer(typeof(List<BRandomizerLocationInfo>));
-            var output = string.Empty;
- 
-            using (var ms = new MemoryStream())
+        /*
+        var output = string.Empty;
+        using (var ms = new MemoryStream())
             {
-                ser_.WriteObject(ms, info_list);
+                ser.WriteObject(ms, Plugin.layout);
                 output = Encoding.UTF8.GetString(ms.ToArray());
  
                 // {"BirthDate":"\/Date(1468591293120+0300)\/","Name":"Fluffy","Tags":["black tail","green eyes"]}
             }
-            File.WriteAllText("./locations/BetterLooseLocations.json", output);
+            File.WriteAllText("./locations/TestReadWrite.json", output);
+        */
 
+        /*foreach(vendordata data in global.statstat.npcvd.BillInventory)
+        {
+            int index = global.statstat.npcvd.BillInventory.IndexOf(data);
+            VendorItem item = Plugin.layout.GetVendorItem("Bill", index);
+            data.Cost = item.Cost;
+            data.Classification = item.Class;
+            data.Description = item.Desc;
+            data.ItemName = item.Name;
+            data.ItemNumber = item.ItemNumber;
+            data.ModuleNumber = item.ModuleNumber;
+            data.ModuleType = item.ModuleType;
+            data.Stock = item.Stock;
+            data.ReqWorldState = item.WorldState;
+            global.statstat.npcvd.BillInventory[index] = data;
+        }
+        foreach(vendordata data in global.statstat.npcvd.JuliaInventory)
+        {
+            int index = global.statstat.npcvd.JuliaInventory.IndexOf(data);
+            VendorItem item = Plugin.layout.GetVendorItem("Mabec", index);
+            data.Cost = item.Cost;
+            data.Classification = item.Class;
+            data.Description = item.Desc;
+            data.ItemName = item.Name;
+            data.ItemNumber = item.ItemNumber;
+            data.ModuleNumber = item.ModuleNumber;
+            data.ModuleType = item.ModuleType;
+            data.Stock = item.Stock;
+            data.ReqWorldState = item.WorldState;
+            global.statstat.npcvd.JuliaInventory[index] = data;
+        }*/
+        
+        /*var ser_ = new DataContractJsonSerializer(typeof(Randomzier_Layout));
+            var output = string.Empty;
+ 
+            using (var ms = new MemoryStream())
+            {
+                ser_.WriteObject(ms, layout);
+                output = Encoding.UTF8.GetString(ms.ToArray());
+ 
+                // {"BirthDate":"\/Date(1468591293120+0300)\/","Name":"Fluffy","Tags":["black tail","green eyes"]}
+            }
+            File.WriteAllText("./locations/RoomsWithItems.json", output);
+        */
 
         // Plugin startup logic
         Log = base.Log;
@@ -254,6 +265,13 @@ public class Plugin : BasePlugin
                 harmony.PatchAll(typeof(Randomizer.SprouterPatch));
                 harmony.PatchAll(typeof(Randomizer.Walker5Patch));
                 harmony.PatchAll(typeof(Randomizer.LeafPatch));
+                harmony.PatchAll(typeof(Randomizer.GamblerPatch));
+                harmony.PatchAll(typeof(Randomizer.Gili5Patch));
+                harmony.PatchAll(typeof(Randomizer.MollyPatch));
+                harmony.PatchAll(typeof(Randomizer.RelicPatch));
+                harmony.PatchAll(typeof(Randomizer.RimePatch));
+                harmony.PatchAll(typeof(Randomizer.SavePatch));
+                harmony.PatchAll(typeof(Randomizer.StatusPatch));
             }
             catch (System.Exception e)
             {

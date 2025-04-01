@@ -29,11 +29,9 @@ namespace Randomizer
             global.statstat.achman.achievementsList[16] = 1;
             SaveDataManager.SetList<int>("achievementslist", global.statstat.achman.achievementsList);
             SaveDataManager.Write(true);
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "alienblob";
-            });
-            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
- 
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("alienblob", "enemy");
+            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
+  
             global.statstat.gsfx.PlayBossDeathChime(__instance.transform.position, 0f);
             __instance.beanhit(170f, 6);
             __instance.beanhit(10f, 6);

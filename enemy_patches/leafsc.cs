@@ -34,10 +34,8 @@ namespace Randomizer
             __instance.resetall();
             __instance.lst.Die();
             GameObject elby = global.elby;
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "leaf";
-            });
-            CheckerComponent.spawnloot(elby, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("leaf", "enemy");
+            CheckerComponent.spawnloot(elby, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
             global.statstat.gsfx.PlayAnyVoice(__instance.lst.vo_morepains[2], __instance.transform.position, 1f, 1f, 0f, 0.5f, 2, __instance.gameObject);
             __instance.chestsmoke.Play();
             __instance.StartCoroutine(__instance.unplay());

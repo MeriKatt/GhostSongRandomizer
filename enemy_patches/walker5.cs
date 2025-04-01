@@ -26,11 +26,9 @@ namespace Randomizer
             SparklyItem item = GameObject.FindObjectOfType<SparklyItem>();
             UnityEngine.Object.Destroy(item.gameObject);
             GameObject elby = global.elby;
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "walker5";
-            });
-            CheckerComponent.spawnloot(elby, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
-        }
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("walker5", "enemy");
+            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
+         }
         [HarmonyPatch(typeof(walker5behavior), nameof(walker5behavior.SpawnRandomLoot))]
         [HarmonyPostfix]
         public static void SpawnRandomLoot(walker5behavior __instance)

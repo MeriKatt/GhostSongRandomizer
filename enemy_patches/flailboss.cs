@@ -43,10 +43,8 @@ namespace Randomizer
             global.statstat.gsfx.PlayAnySound(clip, __instance.transform.position, 0.5f, 0.9f, 0f, 1f);
             global.statstat.gsfx.PlayAnySoundDelayed(clip2, __instance.transform.position, 0.75f, 1f, 0f, 1f, 0.1f);
             __instance.StartCoroutine(__instance.flipsmokems(false, 5f));
-            RandomizerLocation loc = CheckerComponent.locations.Find((RandomizerLocation _loc) => {
-                return _loc.name == "flailboss";
-            });
-            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, loc.modType);
+            RandomizerItemBase loc = Plugin.layout.GetDialogueOrEnemy("flailboss", "enemy");
+            CheckerComponent.spawnloot(__instance.gameObject, loc.Module, loc.Item, loc.arrayNumber, loc.itemNumber, loc.moduleNumber, Plugin.layout.GetModtypeFromString(loc.modType));
  
             __instance.dc.EnemyDeath();
             Collider2D[] array = __instance.allcols;
