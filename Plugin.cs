@@ -30,6 +30,7 @@ using Il2CppSystem.Security.Util;
 using System.Net;
 using System.Reflection;
 using MonoMod.Utils;
+using Random = System.Random;
 
 
 
@@ -71,12 +72,13 @@ public class BRandomizerLocationInfo
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BasePlugin
 {
-    public static Randomizer.RandomzierLayout layout = new RandomzierLayout();
-    List<GameObject> objects = new List<GameObject>();
-    internal static new ManualLogSource Log;
-    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RandomzierLayout));
+    public static bool shouldRandomize = false;
 
-    private void spawnRandomizerItem(string Name, Scene scene, Vector3 pos, RandomizerItemInfo loc) {
+    public static Randomizer.RandomzierLayout layout = new RandomzierLayout();
+    internal static new ManualLogSource Log;
+    public static DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RandomzierLayout));
+
+    public static void spawnRandomizerItem(string Name, Scene scene, Vector3 pos, RandomizerItemInfo loc) {
         if (RandomizerItem.loadFromFile(Name) == false)
         {
             var go = new GameObject("RandomizerItem");
@@ -101,32 +103,19 @@ public class Plugin : BasePlugin
             SceneManager.MoveGameObjectToScene(go, scene);
         }
     }
-    public static bool isItemCloseEnough(Vector2 v1, Vector2 v2){
-            return v1.x - v2.x < 1 && v1.x - v2.x > -1 && v1.y - v2.y < 1 && v1.y - v2.y > -1;
-    }
-    public static bool isItemInCurScene(string sceneName, RandomizerLocation loc) 
-    {
-        string[] words = loc.name.Split("/");
-        foreach(string word in words) {
-            if (word == sceneName) {
-                return true;
-            }
-            return false;
-        }
-        return false;
-    }
-
-    private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
+    private static  void onSceneLoaded(Scene scene, LoadSceneMode mode) {
         SparklyItem[] items = GameObject.FindObjectsOfType<SparklyItem>();
         foreach (SparklyItem item in items) {
-            UnityEngine.Object.Destroy(item.gameObject);
+            if (item.gameObject.GetComponentsInParent<RandomizerItem>(false).Length == 0){
+                UnityEngine.Object.Destroy(item.gameObject);
+            }
         }
         List<RandomizerItemInfo> RandomizerItems = layout.GetRoomItems(scene.name);
         if (RandomizerItems != null) {
             foreach( RandomizerItemInfo loc in RandomizerItems) 
             {
                 Vector2 pos = Plugin.strToVec2(loc.position);
-                spawnRandomizerItem(loc.Name, scene, new Vector3(pos.x, pos.y, 0), loc);
+                spawnRandomizerItem(loc.Name, scene, new Vector3(pos.x, pos.y +1.5f, 0), loc);
                 System.Console.WriteLine("Location found, spawning it"); 
             }
         }
@@ -154,14 +143,117 @@ public class Plugin : BasePlugin
         Vector2 vec = new Vector2(float.Parse(first), float.Parse(second));
         return vec;
     }
+    public static System.Random rng = new Random();  
+
+    public static List<RandomizerItemBase> Shuffle(List<RandomizerItemBase> list)  
+    {  
+        for (int i = list.Count - 1; i > 0; i --){
+            var k =  rng.Next(i+1);
+            var value = list[k];
+            list[k] = list[i];
+            list[i] = value;
+        }
+        return list;
+    }
+    public static void Randomize() 
+    {
+        Randomizer.RandomzierLayout New = new RandomzierLayout() {
+            Rooms = new List<Room>(),
+            DialogueItems = new List<Dialogue>(),
+            EnemyDrops = new List<Enemy>(),
+            Vendors = new List<Vendor>()
+        };
+        List<RandomizerItemBase> items = new List<RandomizerItemBase>();
+        foreach(Room room in Plugin.layout.Rooms) {
+            foreach(RandomizerItemInfo item in Plugin.layout.GetRoomItems(room.Name)){
+                items.Add(RandomizerItemBase.From(item));
+            }
+        }
+        foreach(Vendor ven in Plugin.layout.Vendors) {
+            foreach (VendorItem item in ven.Items) {
+                items.Add(RandomizerItemBase.From(item));
+            }
+        }
+        foreach(Enemy enmy in Plugin.layout.EnemyDrops) {
+            items.Add(enmy.Item);
+        }
+        foreach(Dialogue dial in Plugin.layout.DialogueItems) {
+            items.Add(dial.Item);
+        }
+
+
+        items = Shuffle(items);
+
+
+        int i = 0;
+        int roomInd = 0;
+        foreach(Room room in Plugin.layout.Rooms) {
+            New.Rooms.Add(new Room() {Name = room.Name, Items = new List<RandomizerItemInfo>()});
+            foreach(RandomizerItemInfo item in Plugin.layout.GetRoomItems(room.Name)){
+                RandomizerItemInfo itm = room.Items.Find((RandomizerItemInfo inf) => inf.Name == item.Name); 
+                itm = RandomizerItemInfo.From(items[i], item.Name, item.position);
+                New.Rooms[roomInd].Items.Add(itm);
+                i +=1;
+            }
+            roomInd += 1;
+        }
+        int venInd = 0;
+        foreach(Vendor ven in Plugin.layout.Vendors) {
+            New.Vendors.Add(new Vendor() {Name = ven.Name, Items = new List<VendorItem>()});
+            foreach (VendorItem item in ven.Items) {
+                VendorItem itm = new VendorItem();
+                itm = VendorItem.From(items[i]);
+                New.Vendors[venInd].Items.Add(itm);
+                i += 1;
+            }
+            venInd += 1;
+        }
+        foreach(Enemy enmy in Plugin.layout.EnemyDrops) {
+            New.EnemyDrops.Add(new Enemy(){Name = enmy.Name, Item = RandomizerItemBase.From(items[i])});
+            i+=1;
+        }
+        foreach(Dialogue dial in Plugin.layout.DialogueItems) {
+            New.DialogueItems.Add(new Dialogue(){Name = dial.Name, Item = RandomizerItemBase.From(items[i])});
+            i+=1;
+        }
+        
+        var output = string.Empty;
+            using (var ms = new MemoryStream())
+                {
+                    ser.WriteObject(ms, New);
+                    output = Encoding.UTF8.GetString(ms.ToArray());
+    
+                    // {"BirthDate":"\/Date(1468591293120+0300)\/","Name":"Fluffy","Tags":["black tail","green eyes"]}
+                }
+                File.WriteAllText("./locations/RandomizerSeed.json", output);
+
+    }
     public override void Load()
     {
-
         Plugin.layout = new RandomzierLayout();
-        string input = File.ReadAllText("./locations/DefaultLayout.json");
-        using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
-        {
-            Plugin.layout = (RandomzierLayout)ser.ReadObject(ms);
+        if (File.Exists("./locations/RandomizerSeed.json")) {
+            shouldRandomize = false;
+            string input = File.ReadAllText("./locations/RandomizerSeed.json");
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
+            {
+                Plugin.layout = (RandomzierLayout)ser.ReadObject(ms);
+            }
+        } else {
+            shouldRandomize = true;
+            string input = File.ReadAllText("./locations/DefaultLayout.json");
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
+            {
+                Plugin.layout = (RandomzierLayout)ser.ReadObject(ms);
+            }
+        }
+        if (shouldRandomize) {
+            Plugin.Randomize();
+            Plugin.layout = new RandomzierLayout();
+            string input = File.ReadAllText("./locations/RandomizerSeed.json");
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
+            {
+                Plugin.layout = (RandomzierLayout)ser.ReadObject(ms);
+            }
         }
         /*
         var output = string.Empty;

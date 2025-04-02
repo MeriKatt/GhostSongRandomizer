@@ -23,13 +23,11 @@ namespace Randomizer
         [HarmonyPrefix]
         public static bool fullydelete(slotsfabio __instance)
         {
-            if (Plugin.layout.Rooms == null) return true;
             foreach(Room room in Plugin.layout.Rooms) {
                 foreach(RandomizerItemInfo info in room.Items) {
-                    if (info == null) return true;
-                    if (SaveDataManager.Get<bool>(info.Name + "_wasCollected_"+__instance.row.ToString(), false)) {
+                    System.Console.WriteLine("Attempting to Delete: " + info.Name + "_wasCollected_"+__instance.row.ToString());
+                    
                         SaveDataManager.Set<bool>(info.Name + "_wasCollected_"+__instance.row.ToString(), false);
-                    }
                     
                 }
             }

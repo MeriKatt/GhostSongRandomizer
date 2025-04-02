@@ -32,9 +32,7 @@ namespace Randomizer
             SaveDataManager.Set<bool>(Name + "_wasCollected_"+global.statstat.SaveSlot, wasCollected);
         }
         public static bool loadFromFile(string Name) {
-            return SaveDataManager.Get<bool>(Name + "_wasCollected_"+global.statstat.SaveSlot, false);
+            return SaveDataManager.Get<bool>(Name + "_wasCollected_"+global.statstat.SaveSlot);
         }
-
-        
     }
 }
