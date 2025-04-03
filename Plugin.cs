@@ -106,7 +106,7 @@ public class Plugin : BasePlugin
     private static  void onSceneLoaded(Scene scene, LoadSceneMode mode) {
         SparklyItem[] items = GameObject.FindObjectsOfType<SparklyItem>();
         foreach (SparklyItem item in items) {
-            if (item.gameObject.GetComponentsInParent<RandomizerItem>(false).Length == 0){
+            if (item.gameObject.transform.parent.gameObject.GetType().Name != nameof(RandomizerItem)){
                 UnityEngine.Object.Destroy(item.gameObject);
             }
         }
@@ -115,8 +115,7 @@ public class Plugin : BasePlugin
             foreach( RandomizerItemInfo loc in RandomizerItems) 
             {
                 Vector2 pos = Plugin.strToVec2(loc.position);
-                spawnRandomizerItem(loc.Name, scene, new Vector3(pos.x, pos.y +1.5f, 0), loc);
-                System.Console.WriteLine("Location found, spawning it"); 
+                spawnRandomizerItem(loc.Name, scene, new Vector3(pos.x, pos.y +0.5f, 0), loc); 
             }
         }
         
@@ -166,7 +165,7 @@ public class Plugin : BasePlugin
         List<RandomizerItemBase> items = new List<RandomizerItemBase>();
         foreach(Room room in Plugin.layout.Rooms) {
             foreach(RandomizerItemInfo item in Plugin.layout.GetRoomItems(room.Name)){
-                items.Add(RandomizerItemBase.From(item));
+                items.Add(RandomizerItemBase.From((RandomizerItemBase)item));
             }
         }
         foreach(Vendor ven in Plugin.layout.Vendors) {
@@ -202,7 +201,7 @@ public class Plugin : BasePlugin
             New.Vendors.Add(new Vendor() {Name = ven.Name, Items = new List<VendorItem>()});
             foreach (VendorItem item in ven.Items) {
                 VendorItem itm = new VendorItem();
-                itm = VendorItem.From(items[i]);
+                itm = VendorItem.From((RandomizerItemBase)items[i]);
                 New.Vendors[venInd].Items.Add(itm);
                 i += 1;
             }
@@ -241,15 +240,6 @@ public class Plugin : BasePlugin
         } else {
             shouldRandomize = true;
             string input = File.ReadAllText("./locations/DefaultLayout.json");
-            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
-            {
-                Plugin.layout = (RandomzierLayout)ser.ReadObject(ms);
-            }
-        }
-        if (shouldRandomize) {
-            Plugin.Randomize();
-            Plugin.layout = new RandomzierLayout();
-            string input = File.ReadAllText("./locations/RandomizerSeed.json");
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(input)))
             {
                 Plugin.layout = (RandomzierLayout)ser.ReadObject(ms);

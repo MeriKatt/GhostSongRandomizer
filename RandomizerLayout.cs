@@ -37,7 +37,7 @@ namespace Randomizer
 
         public static RandomizerItemBase From(RandomizerItemInfo info) {
             RandomizerItemBase item = new RandomizerItemBase();
-            item.arrayNumber = info.arrayNumber;
+            item.arrayNumber = -1;
             item.Item = info.Item;
             item.itemNumber = info.itemNumber;
             item.Module = !item.Item;
@@ -48,7 +48,7 @@ namespace Randomizer
         }
         public static RandomizerItemBase From(VendorItem info) {
             RandomizerItemBase item = new RandomizerItemBase();
-            item.arrayNumber = 0;
+            item.arrayNumber = -1;
             item.Item = info.ItemNumber > -1;
             item.itemNumber = info.ItemNumber;
             item.Module = !item.Item;
@@ -65,7 +65,7 @@ namespace Randomizer
         }
         public static RandomizerItemBase From(RandomizerItemBase info) {
             RandomizerItemBase item = new RandomizerItemBase();
-            item.arrayNumber = 0;
+            item.arrayNumber = -1;
             item.Item = info.Item;
             item.itemNumber = info.itemNumber;
             item.Module = !item.Item;
@@ -86,7 +86,7 @@ namespace Randomizer
 
          public static RandomizerItemInfo From(RandomizerItemBase info, string Name, string position) {
             RandomizerItemInfo item = new RandomizerItemInfo();
-            item.arrayNumber = info.arrayNumber;
+            item.arrayNumber = -1;
             item.Item = info.Item;
             item.itemNumber = info.itemNumber;
             item.Module = !item.Item;
@@ -98,16 +98,16 @@ namespace Randomizer
         }
         public static RandomizerItemInfo From(VendorItem info,  string Name, string position) {
             RandomizerItemInfo item = new RandomizerItemInfo();
-            item.arrayNumber = 0;
+            item.arrayNumber = -1;
             item.Item = info.ItemNumber > -1;
             item.itemNumber = info.ItemNumber;
             item.Module = info.ItemNumber == -1;
             item.moduleNumber = info.ModuleNumber;
             if (info.ModuleType == "weapon"){
                 item.modType = "Weapons";
-            } else if (info.ModuleType == "moc") {
+            } else if (info.ModuleType == "mod") {
                 item.modType = "Modifier";
-            } else if (info.ModuleType == "pecial") {
+            } else if (info.ModuleType == "special") {
                 item.modType = "Special";
             }
             item.Name = Name;
@@ -170,8 +170,6 @@ namespace Randomizer
             if (item.ItemNumber > -1) {
                 item.Cost = VendorItemFuncs.GetItemCost(item.ItemNumber);
             } else {
-                System.Console.WriteLine("Bad module number is: " + item.ModuleNumber + " / Bad Module Type is: "+item.ModuleType);
-
                 item.Cost = VendorItemFuncs.GetModCost(item.ModuleNumber, item.ModuleType);
             }
             item.Stock = 1;
@@ -188,43 +186,6 @@ namespace Randomizer
             }
             return item;
         }
-        public static VendorItem From(RandomizerItemInfo info) {
-            VendorItem item = new VendorItem();
-            if (info.Module)
-            {
-                item.ItemNumber = -1;
-            } else {
-                item.ItemNumber = info.itemNumber;
-            }
-            item.ModuleNumber = info.moduleNumber;
-            if (info.modType == "Weapons"){
-                item.ModuleType = "weapon";
-            } else if (info.modType == "Modifier") {
-                item.ModuleType = "mod";
-            } else if (info.modType == "Special") {
-                item.ModuleType = "special";
-            }
-            if (item.ItemNumber > -1) {
-                item.Cost = VendorItemFuncs.GetItemCost(item.ItemNumber);
-            } else {
-                item.Cost = VendorItemFuncs.GetModCost(item.ModuleNumber, item.ModuleType);
-            }
-            item.Stock = 1;
-            if (item.ItemNumber > -1) {
-                VendorItemData dat = VendorItemFuncs.getItemData(item.ItemNumber);
-                item.Class = dat.Class;
-                item.Desc = dat.Desc;
-                item.Name = dat.Name;
-            } else {
-                VendorModData dat = VendorItemFuncs.getModData(item.ModuleNumber, item.ModuleType);
-                item.Class = dat.Class;
-                item.Desc = dat.Desc;
-                item.Name = dat.Name;
-            }
-            return item;
-        }
-        
-        
     }
 
     [DataContract]
