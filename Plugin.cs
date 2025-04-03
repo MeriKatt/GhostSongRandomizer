@@ -69,6 +69,8 @@ public class BRandomizerLocationInfo
     public string item_position { get; set; }
 }
 
+
+
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 public class Plugin : BasePlugin
 {
@@ -77,6 +79,9 @@ public class Plugin : BasePlugin
     public static Randomizer.RandomzierLayout layout = new RandomzierLayout();
     internal static new ManualLogSource Log;
     public static DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(RandomzierLayout));
+
+    
+
 
     public static void spawnRandomizerItem(string Name, Scene scene, Vector3 pos, RandomizerItemInfo loc) {
         if (RandomizerItem.loadFromFile(Name) == false)
@@ -104,9 +109,21 @@ public class Plugin : BasePlugin
         }
     }
     private static  void onSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if(scene.name == "dpsplash" ) {
+            if (Plugin.shouldRandomize)
+            {
+                Plugin.Randomize();
+                Plugin.layout = new RandomzierLayout();
+                string input = System.IO.File.ReadAllText("./locations/RandomizerSeed.json");
+                using (var ms = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(input)))
+                {
+                    Plugin.layout = (RandomzierLayout)Plugin.ser.ReadObject(ms);
+                }
+            }
+        }
         SparklyItem[] items = GameObject.FindObjectsOfType<SparklyItem>();
         foreach (SparklyItem item in items) {
-            if (item.gameObject.transform.parent.gameObject.GetType().Name != nameof(RandomizerItem)){
+            if (item.gameObject.transform.parent != null && item.gameObject.transform.parent.gameObject != null && item.gameObject.transform.parent.gameObject.GetType().Name != nameof(RandomizerItem)){
                 UnityEngine.Object.Destroy(item.gameObject);
             }
         }

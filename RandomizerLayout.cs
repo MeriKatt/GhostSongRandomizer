@@ -41,6 +41,9 @@ namespace Randomizer
             item.Item = info.Item;
             item.itemNumber = info.itemNumber;
             item.Module = !item.Item;
+            if (item.Module) {
+                item.itemNumber =  -1;
+            }
             item.moduleNumber = info.moduleNumber;
             item.modType = info.modType;
             if (item.itemNumber == 0 && item.Module == false) item.Item = true;
@@ -69,6 +72,9 @@ namespace Randomizer
             item.Item = info.Item;
             item.itemNumber = info.itemNumber;
             item.Module = !item.Item;
+            if (item.Module) {
+                item.itemNumber =  -1;
+            }
             if (item.itemNumber == 0 && item.Module == false) item.Item = true;
             item.moduleNumber = info.moduleNumber;
             item.modType = info.modType;
@@ -90,6 +96,9 @@ namespace Randomizer
             item.Item = info.Item;
             item.itemNumber = info.itemNumber;
             item.Module = !item.Item;
+            if (item.Module) {
+                item.itemNumber =  -1;
+            }
             item.moduleNumber = info.moduleNumber;
             item.modType = info.modType;
             item.Name = Name;
@@ -102,6 +111,9 @@ namespace Randomizer
             item.Item = info.ItemNumber > -1;
             item.itemNumber = info.ItemNumber;
             item.Module = info.ItemNumber == -1;
+            if (item.Module) {
+                item.itemNumber =  -1;
+            }
             item.moduleNumber = info.ModuleNumber;
             if (info.ModuleType == "weapon"){
                 item.modType = "Weapons";
@@ -159,7 +171,9 @@ namespace Randomizer
                 item.ItemNumber = info.itemNumber;
             }
             item.ModuleNumber = info.moduleNumber;
-            
+            if (item.ItemNumber != -1) {
+                item.ModuleNumber = -1;
+            }
             if (info.modType == "Weapons"){
                 item.ModuleType = "weapon";
             } else if (info.modType == "Modifier") {
